@@ -1,0 +1,44 @@
+{
+  "schema": {
+    "location": {
+      "title": "Location:",
+      "placeholder": "Please enter a location"
+    },
+    "parameterMax": {
+      "type": "Number",
+      "title": "Max instances:",
+      "placeholder": "Upto 48"
+    },
+    "parameterMin": {
+      "type": "Number",
+      "title": "Min instances:",
+      "placeholder": "Upto 2"
+    },
+    "parameterLevel": {
+      "type": "Select",
+      "title": "Choose level:",
+      "options": [
+        "None",
+        "One",
+        "Two",
+        "Three"
+      ]
+    }
+  },
+  "fieldsets": [
+    {
+      "legend": false,
+      "fields": [
+        "location",
+        "parameterMax",
+        "parameterMin",
+        "parameterLevel"
+      ]
+    }
+  ],
+  "defaults": {
+    "parameterMax": 10,
+    "parameterMin": 1,
+    "parameterAvailability": "None"
+  }
+}
