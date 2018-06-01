@@ -3,5 +3,5 @@ module.exports = {
   testEnvironment: 'node',
   verbose: true,
   testPathIgnorePatterns: ['/node_modules/'],
-  testRegex: /\/__tests__\/.*|(\\.|\/)(spec)\\.jsx?$/,
+  testMatch: ['**/__tests__/**/*.js?(x)', '**/?(*.)+(.spec|.test).js?(x)'],
 }
