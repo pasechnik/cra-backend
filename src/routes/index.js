@@ -1,11 +1,11 @@
 import Router from 'koa-router'
 import debug from 'debug'
-import applications from './applications/router'
-import auth from './auth/router'
-import forms from './forms/router'
-import settings from './settings/router'
-import tests from './tsts/router'
-import users from './users/router'
+// import applications from './applications/router'
+// import auth from './auth/router'
+// import forms from './forms/router'
+// import settings from './settings/router'
+// import tests from './tsts/router'
+// import users from './users/router'
 
 const error = debug('app:server:error')
 const log = debug('app:server')
@@ -29,7 +29,7 @@ const injectRoute = (app, routeConfig) => {
 
 export const init = (app) => {
   [
-    auth, applications, forms, settings, tests, users,
+    // auth, applications, forms, settings, tests, users,
   ]
     .forEach(r => injectRoute(app, r))
 }
