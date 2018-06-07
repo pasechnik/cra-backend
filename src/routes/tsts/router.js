@@ -1,5 +1,5 @@
 import * as test from './controller'
-import { ensureUser } from '../auth/controller'
+// import { ensureUser } from '../auth/controller'
 
 export const baseUrl = '/v1/tests'
 

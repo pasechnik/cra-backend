@@ -6,6 +6,8 @@ import debug from 'debug'
 // import settings from './settings/router'
 // import tests from './tsts/router'
 // import users from './users/router'
+import root from './root/router'
+import verification from './verification/router'
 
 const error = debug('app:server:error')
 const log = debug('app:server')
@@ -29,6 +31,7 @@ const injectRoute = (app, routeConfig) => {
 
 export const init = (app) => {
   [
+    root, verification,
     // auth, applications, forms, settings, tests, users,
   ]
     .forEach(r => injectRoute(app, r))
