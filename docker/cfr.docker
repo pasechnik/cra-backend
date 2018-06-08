@@ -30,6 +30,6 @@ WORKDIR /app
 COPY --from=builder /tmp/node_modules /app/node_modules
 
 # Copying application code
-COPY . /app
+COPY --from=builder /app/dist /app/dist
 
 CMD npm start
