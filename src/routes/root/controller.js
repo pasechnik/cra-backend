@@ -3,7 +3,7 @@ const App = (ctx, next) => {
   return (next ? next() : ctx)
 }
 
-const Bpp = async (ctx, next) => {
+const Bpp = (ctx, next) => {
   ctx.body = { ...ctx.body, bpp: 'bpp' }
   return (next ? next() : ctx)
 }
