@@ -1,5 +1,4 @@
 import debug from 'debug'
-import { obj } from 'the-utils'
 import { getCtxParam, runFunction } from './module'
 
 const error = debug('app:common:controller:error')

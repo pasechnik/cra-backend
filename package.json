@@ -14,7 +14,7 @@
     "deploy:prod": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:watch": "babel src --out-dir dist --watch",
-    "test": "better-npm-run test",
+    "test": "better-npm-run test:ci",
     "test:dev": "npm run test -- --watch",
     "test:coverage": "better-npm-run test:coverage",
     "lint": "eslint src/**/*.js",
@@ -67,17 +67,22 @@
         "DEBUG": "app:*"
       }
     },
+    "test:ci": {
+      "command": "jest",
+      "env": {
+        "CI": true,
+        "DEBUG": "app:*"
+      }
+    },
     "test": {
       "command": "jest",
       "env": {
-        "NODE_ENV": "test",
         "DEBUG": "test:*"
       }
     },
     "test:coverage": {
       "command": "jest --coverage",
       "env": {
-        "NODE_ENV": "test",
         "DEBUG": "test:*"
       }
     }
@@ -120,7 +125,7 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "glob": "^7.1.2",
-    "jest": "^23.1.0",
+    "jest": "^21.2.1",
     "json-promise": "^1.1.8",
     "jsonwebtoken": "^8.2.2",
     "koa": "^2.5.1",
