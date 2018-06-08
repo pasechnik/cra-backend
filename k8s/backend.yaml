@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: backend
+  labels:
+    app: miniwebtrader
+    tier: backend
+spec:
+  # this replicas value is default
+  # modify it according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: backend
+    matchExpressions:
+      - {key: tier, operator: In, values: [backend]}
+  template:
+    metadata:
+      labels:
+        app: miniwebtrader
+        tier: backend
+    spec:
+      containers:
+      - name: node-backend
+        image: registry.gitlab.com/blackit/cra-backend/master:7924c137315425d4d4eeabe31622091960e2ba36
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: PORT
+          value: 4060
+          # If your cluster config does not include a dns service, then to
+          # instead access environment variables to find service host
+          # info, comment out the 'value: dns' line above, and uncomment the
+          # line below.
+          # value: env
+        ports:
+        - containerPort: 80
