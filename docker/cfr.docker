@@ -17,7 +17,7 @@ COPY . /app
 # RUN npm test
 RUN npm run deploy:prod
 
-FROM node AS runner
+FROM node:alpine AS runner
 
 ENV HOST "0.0.0.0"
 ENV PORT "4060"
@@ -31,5 +31,6 @@ COPY --from=builder /tmp/node_modules /app/node_modules
 
 # Copying application code
 COPY --from=builder /app/dist /app/dist
+COPY . /app
 
 CMD npm start
