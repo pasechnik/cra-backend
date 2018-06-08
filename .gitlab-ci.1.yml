@@ -1,0 +1,125 @@
+image: docker:dind
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay
+  CONTAINER_PROJECT: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+  CONTAINER_IMAGE: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_REF_SLUG
+  CONTAINER_TAG: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_TAG
+  LATEST_IMAGE: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest
+
+stages:
+  - package
+#  - all
+#  - setup
+#  - test
+#  - build
+#  - deploy
+
+#prepare:
+#  image: node:alpine
+#  stage: setup
+#  cache:
+#    paths:
+#      - node_modules
+#  script:
+#    - npm install --no-optional --silent
+#  artifacts:
+#    paths:
+#      - node_modules
+
+#node-test:
+#  image: node:alpine
+#  stage: test
+#  cache:
+#    paths:
+#      - node_modules
+#  script:
+#    - npm run test
+#  artifacts:
+#    paths:
+#      - node_modules
+
+#node-build:
+#  image: node:alpine
+#  stage: build
+#  cache:
+#    paths:
+#      - node_modules
+#  script:
+#    - npm run build
+#  artifacts:
+#    paths:
+#      - build
+
+docker-build-branch:
+  stage: package
+  script:
+    - docker build --cache-from $LATEST_IMAGE -t $CONTAINER_IMAGE .
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker push $CONTAINER_IMAGE
+  only:
+    - branches
+  except:
+    - master
+
+docker-build-tag:
+  stage: package
+  script:
+    - docker build --cache-from $LATEST_IMAGE -t $CONTAINER_TAG .
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker push $CONTAINER_TAG
+  only:
+    - tags
+
+docker-build-latest:
+  stage: package
+  script:
+    - docker build --cache-from $LATEST_IMAGE -t $LATEST_IMAGE .
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker push $LATEST_IMAGE
+  only:
+    - master
+
+.all-in-one:
+  image: node:alpine
+  stage: all
+  cache:
+    paths:
+      - node_modules
+  script:
+    - npm install --no-optional --silent
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - build
+
+.pages:
+  stage: package
+  script:
+  - cp -r ./build/* ./public
+  artifacts:
+    paths:
+    - public
+  only:
+    - master
+
+#  before_script:
+#    - docker info
+
+#k8s-deploy:
+#  image: google/cloud-sdk
+#  stage: deploy
+#  script:
+#  - echo "$GOOGLE_KEY" > key.json
+#  - gcloud auth activate-service-account --key-file key.json
+#  - gcloud config set compute/zone europe-west1-c
+#  - gcloud config set project actuator-sample
+#  - gcloud config set container/use_client_certificate True
+#  - gcloud container clusters get-credentials actuator-sample
+#  - kubectl delete secret registry.gitlab.com
+#  - kubectl create secret docker-registry registry.gitlab.com --docker-server=https://registry.gitlab.com --docker-username=marcolenzo --docker-password=$REGISTRY_PASSWD --docker-email=lenzo.marco@gmail.com
+#  - kubectl apply -f deployment.yml
