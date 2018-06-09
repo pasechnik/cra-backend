@@ -1,9 +1,10 @@
 import debug from 'debug'
 import fs from 'fs'
 import path from 'path'
-import { getCtxParam, mCheckTable, mGetEngine, retError, retInfo } from '../common/module'
-import { id, output, cast } from '../../models/settings'
 import { str } from 'the-utils'
+import { getCtxParam, retError, retInfo } from '../common/module'
+import { mCheckTable, mGetEngine } from '../common/module.db'
+import { id, cast } from '../../models/settings'
 
 const error = debug('app:settings:module:error')
 const log = debug('app:settings:module')
