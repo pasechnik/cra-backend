@@ -67,7 +67,7 @@ export const routes = [
       applications.checkTable(),
       applications.getApplication(),
       applications.deleteApplication(),
-      // common.cutResults('application'),
+      common.cutResults('application'),
     ],
   },
 ]

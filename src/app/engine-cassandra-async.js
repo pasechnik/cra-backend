@@ -1,8 +1,7 @@
 import uuid from 'uuid'
 import debug from 'debug'
 import json from 'json-promise'
-import { str } from 'the-utils'
-import { obj } from 'the-utils'
+import { obj, str } from 'the-utils'
 import { getCollection, connection } from './db-cassandra-async'
 
 const error = debug('app:engine:error')
@@ -39,17 +38,6 @@ export class Engine {
       await collection.execute(this.getQuery('createTable'))
     } catch (err) {
       // error('')s
-    }
-  }
-
-  async createTable0() {
-    if (this.isTable === false) {
-      const collection = connection('system_schema')
-      const r = await collection.execute(this.getQuery('checkTable'), [this.namespace, this.room])
-      if (r.rows[0].count.toNumber() === 0) {
-        await collection.execute(this.getQuery('createTable'))
-      }
-      this.isTable = true
     }
   }
 
@@ -249,7 +237,6 @@ export class Engine {
       throw e
     }
   }
-
 }
 
 export default Engine
