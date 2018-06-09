@@ -31,8 +31,8 @@ const injectRoute = (app, routeConfig) => {
 
 export const init = (app) => {
   [
-    applications,
     root,
+    applications,
     settings,
     verification,
     // auth, forms, tests, users,
