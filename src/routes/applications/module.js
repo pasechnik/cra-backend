@@ -1,4 +1,4 @@
-import { mCheckTable, mGetEngine } from '../common/module'
+import { mCheckTable, mGetEngine } from '../common/module.db'
 
 // import debug from 'debug'
 // const error = debug('app:applications:module:error')
