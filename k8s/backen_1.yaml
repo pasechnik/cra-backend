@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: node-backend
-        image: registry.gitlab.com/blackit/cra-backend/master:7924c137315425d4d4eeabe31622091960e2ba36
+        image: r.cfcr.io/pasechnik_lab/blackit/crabackend:master
         resources:
           requests:
             cpu: 100m
@@ -36,4 +36,4 @@ spec:
           # line below.
           # value: env
         ports:
-        - containerPort: 80
+        - containerPort: 4060
