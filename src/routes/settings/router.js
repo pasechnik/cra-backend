@@ -1,13 +1,5 @@
 import * as settings from './controller'
 import * as common from '../common/controller'
-import * as tsts from '../tsts/controller'
-import * as application from '../applications/controller'
-import * as artifactory from '../artifactory/controller'
-import * as boms from '../boms/controller'
-import * as clusters from '../clusters/controller'
-import * as gates from '../gates/controller'
-import * as servers from '../servers/controller'
-import * as vnfs from '../vnfs/controller'
 
 export const baseUrl = '/v1/settings'
 
@@ -34,23 +26,7 @@ export const routes = [
     method: 'GET',
     route: '/clear',
     handlers: [
-      application.checkTable(),
-      artifactory.checkTable(),
-      boms.checkTable(),
-      clusters.checkTable(),
-      gates.checkTable(),
-      servers.checkTable(),
-      settings.checkTable(),
-      vnfs.checkTable(),
-
-      application.clearData(),
-      artifactory.clearData(),
-      boms.clearData(),
-      clusters.clearData(),
-      gates.clearData(),
-      servers.clearData(),
       settings.clearData(),
-      vnfs.clearData(),
       // common.cutResults('clear'),
     ],
   },

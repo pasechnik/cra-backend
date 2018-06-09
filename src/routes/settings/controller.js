@@ -1,4 +1,6 @@
 import { cast, patch, output } from '../../models/settings'
+import { dbClear } from '../common/module.db'
+import { runFunction, runOutput } from '../common/module'
 import {
   getEngine,
   runCheckTable,
@@ -9,12 +11,6 @@ import {
   dbCreateSettings,
   dbUpdateSettings,
 } from './module'
-
-import {
-  dbClear,
-  runFunction,
-  runOutput,
-} from '../common/module'
 
 const routeKey = 'setting'
 const routeKeys = `${routeKey}s`

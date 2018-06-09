@@ -1,15 +1,10 @@
 import { obj } from 'the-utils'
-import config from '../config'
 
 export const id = '11111111-1111-1111-1111-111111111111'
 
 export const fields = {
   id,
   clearLogsInterval: 0,
-  showInfrastructure: false,
-  restApiUrl: config.restApiUrl,
-  restApiEnabled: config.restApiEnabled,
-  applianceIp: config.applianceIp,
   authEnabled: false,
 }
 

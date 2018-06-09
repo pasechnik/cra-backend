@@ -3,10 +3,10 @@ import debug from 'debug'
 import applications from './applications/router'
 // import auth from './auth/router'
 // import forms from './forms/router'
-// import settings from './settings/router'
 // import tests from './tsts/router'
 // import users from './users/router'
 import root from './root/router'
+import settings from './settings/router'
 import verification from './verification/router'
 
 const error = debug('app:server:error')
@@ -33,8 +33,9 @@ export const init = (app) => {
   [
     applications,
     root,
+    settings,
     verification,
-    // auth, forms, settings, tests, users,
+    // auth, forms, tests, users,
   ]
     .forEach(r => injectRoute(app, r))
 }
