@@ -20,7 +20,7 @@ import { errorMiddleware } from '../middleware'
 const app = new Koa()
 
 app.keys = [config.session]
-app.use(convert(cors({ methods: 'GET,HEAD,PATCH,PUT,POST,DELETE' })))
+app.use(convert(cors({ methods: 'GET,HEAD,PATCH,OPTIONS,PUT,POST,DELETE' })))
 
 if (config.env === 'development') {
   app.use(convert(logger()))

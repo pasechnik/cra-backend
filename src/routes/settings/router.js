@@ -26,6 +26,7 @@ export const routes = [
     method: 'GET',
     route: '/clear',
     handlers: [
+      settings.checkTable(),
       settings.clearData(),
       // common.cutResults('clear'),
     ],
