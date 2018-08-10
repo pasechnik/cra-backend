@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  namespace: production
   name: cassandra
   labels:
     app: cassandra
@@ -56,13 +57,13 @@ spec:
           - name: HEAP_NEWSIZE
             value: 100M
           - name: CASSANDRA_SEEDS
-            value: "cassandra-0.cassandra.blackit.svc.cluster.local"
+            value: "cassandra-0.cassandra.production.svc.cluster.local"
           - name: CASSANDRA_CLUSTER_NAME
-            value: "blackit"
+            value: "production"
           - name: CASSANDRA_DC
-            value: "DC1-blackit"
+            value: "DC1-production"
           - name: CASSANDRA_RACK
-            value: "Rack1-blackit"
+            value: "Rack1-production"
 #          - name: CASSANDRA_SEED_PROVIDER
 #            value: io.k8s.cassandra.KubernetesSeedProvider
           - name: POD_IP
