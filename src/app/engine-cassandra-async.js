@@ -1,8 +1,8 @@
 import uuid from 'uuid'
 import debug from 'debug'
 import json from 'json-promise'
-import { obj, str } from 'the-utils'
-import { getCollection, connection } from './db-cassandra-async'
+import { str, obj } from 'the-utils'
+import getConnection from './db-cassandra-async'
 
 const error = debug('app:engine:error')
 const log = debug('app:engine')
@@ -24,17 +24,28 @@ export class Engine {
       removeByParam: str.template`DELETE FROM ${'room'} WHERE ${'param'} = ?`,
       checkTable: 'SELECT count(*) FROM system_schema.tables WHERE keyspace_name=? and table_name = ?',
       checkTableCount: `SELECT count(*) FROM ${'room'}`,
-      createTable: `CREATE TABLE ${this.namespace}.${this.room} ( id uuid, value varchar, PRIMARY KEY (id) )`,
+      createTable: `CREATE TABLE IF NOT EXISTS 
+        ${this.namespace}.${this.room} 
+        ( id uuid, value varchar, PRIMARY KEY (id) )`,
       createKeyspace: `CREATE KEYSPACE IF NOT EXISTS ${this.namespace} WITH replication = {'class': 'SimpleStrategy',
                         'replication_factor' : 3}`,
     }
     this.isTable = false
   }
 
+  async createKeyspace() {
+    try {
+      const collection = getConnection('system_schema')
+      await collection.execute(this.getQuery('createKeyspace'))
+    } catch (err) {
+      // error('')s
+    }
+  }
+
   async createTable() {
     try {
-      const collection = connection('system_schema')
-      await collection.execute(this.getQuery('createKeyspace'))
+      const collection = getConnection('system_schema')
+      // await collection.execute(this.getQuery('createKeyspace'))
       await collection.execute(this.getQuery('createTable'))
     } catch (err) {
       // error('')s
@@ -46,7 +57,7 @@ export class Engine {
    * @returns {Promise}
    */
   getCollection() {
-    return getCollection(this.namespace)
+    return getConnection(this.namespace)
   }
 
   /**
@@ -84,9 +95,11 @@ export class Engine {
   async has(key) {
     try {
       const collection = this.getCollection()
-      const r = await collection.execute(this.getQuery('countWhere'), [key])
-      const c = r.rows[0].count.toNumber()
-      return c > 0
+      const r = await collection.execute(this.getQuery('selectOne'), [key])
+      return r.rowLength > 0
+      // const r = await collection.execute(this.getQuery('countWhere'), [key])
+      // const c = r.rows[0].count.toNumber()
+      // return c > 0
     } catch (e) {
       throw e
     }
@@ -237,6 +250,7 @@ export class Engine {
       throw e
     }
   }
+
 }
 
 export default Engine

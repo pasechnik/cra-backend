@@ -1,4 +1,4 @@
-import { mCheckTable, mGetEngine } from '../common/module.db'
+import { mCheckTable, mGetEngine } from '../../modules/db'
 
 // import debug from 'debug'
 // const error = debug('app:applications:module:error')
@@ -6,5 +6,4 @@ import { mCheckTable, mGetEngine } from '../common/module.db'
 
 export const getEngine = () => mGetEngine('applications')
 export const runCheckTable = async (key, ctx) => mCheckTable('applications')
-
 

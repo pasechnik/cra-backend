@@ -7,9 +7,10 @@ import cors from 'koa-cors'
 import customPassport from '../config/passport'
 import config from '../config'
 import { errorMiddleware } from '../middleware'
+import init from '../app/init'
+import routes from '../routes'
 
 // import debug from 'debug'
-// import io from 'socket.io'
 // import mount from 'koa-mount'
 // import serve from 'koa-static'
 // import { Storage } from '../app/storage'
@@ -20,7 +21,7 @@ import { errorMiddleware } from '../middleware'
 const app = new Koa()
 
 app.keys = [config.session]
-app.use(convert(cors({ methods: 'GET,HEAD,PATCH,OPTIONS,PUT,POST,DELETE' })))
+app.use(convert(cors({ methods: 'GET,HEAD,PATCH,PUT,POST,DELETE' })))
 
 if (config.env === 'development') {
   app.use(convert(logger()))
@@ -33,9 +34,13 @@ app.use(errorMiddleware())
 app.use(customPassport.initialize())
 // app.use(customPassport.session())
 
-const routes = require('../routes').default
+// const routes = require('../routes').default
 
 routes(app)
+init()
+// const promise = Promise.resolve(init())
+//   .then(settings => log({ settings }))
+// log(promise)
 
 // if (!module.parent) {
 //   app.server = app.listen(config.port, () => {
@@ -53,5 +58,6 @@ routes(app)
 // socketsCache(sockets, cache)
 //
 // cache.autostart()
+
 
 export default app

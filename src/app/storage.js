@@ -1,7 +1,7 @@
 import debug from 'debug'
 import { Engine } from './engine-object-async'
 import { obj } from 'the-utils'
-import emit from '../sockets/emit'
+// import emit from '../sockets/emit'
 import { roomConfig as RoomConfig, room as Room, roomState as RoomState } from '../models'
 
 const error = debug('app:storage:error')
@@ -19,52 +19,52 @@ export class Storage {
     this.engine = new Engine(Name)
   }
 
-  /**
-   *
-   * @param io
-   */
-  setIO(io) {
-    this.io = io
-    return this.io
-  }
+  // /**
+  //  *
+  //  * @param io
+  //  */
+  // setIO(io) {
+  //   this.io = io
+  //   return this.io
+  // }
+  //
+  // /**
+  //  *
+  //  * @param room
+  //  * @param data
+  //  * @returns {*}
+  //  */
+  // emitData(room, data) {
+  //   if (this.io !== null) {
+  //     emit.roomData(`DATA_${room}`, data, this.io)
+  //   }
+  //
+  //   return data
+  // }
 
-  /**
-   *
-   * @param room
-   * @param data
-   * @returns {*}
-   */
-  emitData(room, data) {
-    if (this.io !== null) {
-      emit.roomData(`DATA_${room}`, data, this.io)
-    }
-
-    return data
-  }
-
-  /**
-   *
-   * @param data
-   * @returns {*}
-   */
-  emitConfig(data) {
-    if (this.io !== null) {
-      emit.roomConfig(data, this.io)
-    }
-    return data
-  }
-
-  /**
-   *
-   * @param data
-   * @returns {*}
-   */
-  emitState(data) {
-    if (this.io !== null) {
-      emit.roomStates(data, this.io)
-    }
-    return data
-  }
+  // /**
+  //  *
+  //  * @param data
+  //  * @returns {*}
+  //  */
+  // emitConfig(data) {
+  //   if (this.io !== null) {
+  //     emit.roomConfig(data, this.io)
+  //   }
+  //   return data
+  // }
+  //
+  // /**
+  //  *
+  //  * @param data
+  //  * @returns {*}
+  //  */
+  // emitState(data) {
+  //   if (this.io !== null) {
+  //     emit.roomStates(data, this.io)
+  //   }
+  //   return data
+  // }
 
   /**
    *
@@ -226,13 +226,13 @@ export class Storage {
    * @param room
    * @returns {boolean}
    */
-  isRoomEmpty(room) {
-    if (this.io !== null) {
-      return !this.io.sockets.adapter.rooms[room]
-    }
-
-    return true
-  }
+  // isRoomEmpty(room) {
+  //   if (this.io !== null) {
+  //     return !this.io.sockets.adapter.rooms[room]
+  //   }
+  //
+  //   return true
+  // }
 
 }
 

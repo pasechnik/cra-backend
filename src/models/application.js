@@ -4,6 +4,8 @@ export const fields = {
   id: 0,
   name: '',
   friendlyName: '',
+  vnfDeploy: false,
+  deploymentType: 'spinnaker', //  "spinnaker" | "cnf" | "helm" | "cnees" | "local"
   address: '',
 }
 

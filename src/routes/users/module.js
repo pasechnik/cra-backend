@@ -1,5 +1,7 @@
-import { mCheckTable, mGetEngine } from '../common/module'
-import { cast, defaults, id } from '../../models/user'
+import uuid from 'uuid'
+import { mCheckTable, mGetEngine } from '../../modules/db'
+import { cast, defaults } from '../../models/user'
+// id
 
 // import debug from 'debug'
 // const error = debug('app:users:module:error')
@@ -12,6 +14,6 @@ export const dbAddFirstUser = async () => {
   const e = getEngine()
   const N = await e.count()
   if (N === 0) {
-    await e.set(id, cast(defaults))
+    await e.set(uuid(), cast(defaults))
   }
 }
