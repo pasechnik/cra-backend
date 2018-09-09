@@ -1,5 +1,7 @@
 import * as settings from './controller'
-import * as common from '../common/controller'
+import * as application from '../applications/controller'
+import * as auth from '../auth/controller'
+import { cutResults } from '../../modules/context'
 
 export const baseUrl = '/v1/settings'
 
@@ -9,8 +11,9 @@ export const routes = [
     route: '/',
     handlers: [
       settings.checkTable(),
+      auth.ensureUser(),
       settings.getSettings(),
-      common.cutResults('settings'),
+      cutResults('settings'),
     ],
   },
   {
@@ -18,25 +21,48 @@ export const routes = [
     route: '/',
     handlers: [
       settings.checkTable(),
+      auth.ensureUser(['admin']),
       settings.createSetting(),
-      common.cutResults('settings'),
+      cutResults('settings'),
     ],
   },
   {
     method: 'GET',
     route: '/clear',
     handlers: [
+      application.checkTable(),
       settings.checkTable(),
+      auth.ensureUser(['admin']),
+
+      application.clearData(),
       settings.clearData(),
-      // common.cutResults('clear'),
+      // cutResults('clear'),
     ],
   },
   {
     method: 'GET',
     route: '/version',
     handlers: [
+      auth.ensureUser(),
       settings.getVersion(),
-      common.cutResults('settings'),
+      cutResults('settings'),
+    ],
+  },
+  {
+    method: 'GET',
+    route: '/dashboard',
+    handlers: [
+      auth.ensureUser(),
+      settings.getDashboard(),
+      cutResults('dashboard'),
+    ],
+  },
+  {
+    method: 'POST',
+    route: '/offline',
+    handlers: [
+      settings.importOffline(),
+      cutResults('settings'),
     ],
   },
   {
@@ -44,8 +70,9 @@ export const routes = [
     route: '/:id',
     handlers: [
       settings.checkTable(),
+      auth.ensureUser(),
       settings.getSetting(),
-      common.cutResults('settings'),
+      cutResults('settings'),
     ],
   },
   {
@@ -53,9 +80,10 @@ export const routes = [
     route: '/:id',
     handlers: [
       settings.checkTable(),
+      auth.ensureUser(['admin']),
       settings.getSetting(),
       settings.patchSetting(),
-      common.cutResults('settings'),
+      cutResults('settings'),
     ],
   },
   {
@@ -63,9 +91,10 @@ export const routes = [
     route: '/:id',
     handlers: [
       settings.checkTable(),
+      auth.ensureUser(['admin']),
       settings.getSetting(),
       settings.updateSetting(),
-      common.cutResults('settings'),
+      cutResults('settings'),
     ],
   },
   {
@@ -73,9 +102,10 @@ export const routes = [
     route: '/',
     handlers: [
       settings.checkTable(),
+      auth.ensureUser(['admin']),
       settings.getSetting(),
       settings.deleteSetting(),
-      // common.cutResults('settings'),
+      // cutResults('settings'),
     ],
   },
   {
@@ -83,9 +113,10 @@ export const routes = [
     route: '/:id',
     handlers: [
       settings.checkTable(),
+      auth.ensureUser(['admin']),
       settings.getSetting(),
       settings.deleteSetting(),
-      // common.cutResults('settings'),
+      // cutResults('settings'),
     ],
   },
 ]

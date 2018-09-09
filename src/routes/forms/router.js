@@ -1,5 +1,6 @@
 import * as forms from './controller'
-import * as tests from '../tsts/controller'
+import * as auth from '../auth/controller'
+import { spreadResults } from '../../modules/context'
 
 export const baseUrl = '/v1/forms'
 
@@ -8,17 +9,18 @@ export const routes = [
     method: 'GET',
     route: '/',
     handlers: [
-      forms.getForms,
-      // tests.getTests('forms'),
+      auth.ensureUser(),
+      forms.getForms(),
     ],
   },
   {
     method: 'GET',
     route: '/:id',
     handlers: [
-      forms.getForm,
-      forms.parseForm,
-      // tests.getTest('forms_test'),
+      auth.ensureUser(),
+      forms.getForm(),
+      forms.parseForm(),
+      spreadResults('form'),
     ],
   },
 ]

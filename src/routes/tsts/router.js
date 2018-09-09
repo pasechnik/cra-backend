@@ -1,5 +1,5 @@
 import * as test from './controller'
-// import { ensureUser } from '../auth/controller'
+import { ensureUser } from '../auth/controller'
 
 export const baseUrl = '/v1/tests'
 
@@ -8,6 +8,9 @@ export const routes = [
     method: 'GET',
     route: '/',
     handlers: [
+      ensureUser(['user', 'admin']),
+      // ensureUser('user'),
+      // ensureUser('admin'),
       // ensureUser(),
       test.getTest('test'),
       test.getTests('tests'),
@@ -32,15 +35,6 @@ export const routes = [
   },
   {
     method: 'PATCH',
-    route: '/:id',
-    handlers: [
-      test.getTest('test'),
-      // test.getApplication,
-      // test.patchApplication,
-    ],
-  },
-  {
-    method: 'PUT',
     route: '/:id',
     handlers: [
       test.getTest('test'),

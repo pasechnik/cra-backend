@@ -3,7 +3,6 @@ import axios from 'axios'
 import debug from 'debug'
 import { obj } from 'the-utils'
 import { Engine as CassEngine } from './engine-cassandra-async'
-import { Engine } from './engine-nedb-async'
 import { Engine as Memory } from './engine-object-async'
 import {
   roomConfig as modelRoomConfig, room as modelRoom, roomState as modelRoomState,
@@ -13,17 +12,11 @@ const dbGates = new CassEngine('gates', 'user')
 
 const error = debug('app:cache:error')
 const log = debug('app:cache')
-log.log = console.log.bind(console)
 
 export class Cache {
   constructor(name) {
     this.storage = null
 
-    if (name !== undefined) {
-      this.engine = new Engine(`${name}-db`)
-    } else {
-      this.engine = new Engine('roomsConfigs')
-    }
     if (name !== undefined) {
       this.memory = new Memory(`${name}-mem`)
     } else {

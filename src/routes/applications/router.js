@@ -1,5 +1,6 @@
 import * as applications from './controller'
-import * as common from '../common/controller'
+import * as auth from '../auth/controller'
+import { cutResults } from '../../modules/context'
 
 export const baseUrl = '/v1/applications'
 
@@ -8,66 +9,66 @@ export const routes = [
     method: 'GET',
     route: '/',
     handlers: [
-      applications.checkTable(),
+      auth.ensureUser(),
       applications.getApplications(),
-      common.cutResults('applications'),
+      cutResults('applications'),
     ],
   },
   {
     method: 'POST',
     route: '/',
     handlers: [
-      applications.checkTable(),
+      auth.ensureUser(['admin']),
       applications.createApplication(),
-      common.cutResults('application'),
+      cutResults('application'),
     ],
   },
   {
     method: 'GET',
     route: '/clear',
     handlers: [
-      applications.checkTable(),
+      auth.ensureUser(['admin']),
       applications.clearData(),
-      common.cutResults('applications'),
+      cutResults('applications'),
     ],
   },
   {
     method: 'GET',
     route: '/:id',
     handlers: [
-      applications.checkTable(),
+      auth.ensureUser(),
       applications.getApplication(),
-      common.cutResults('application'),
+      cutResults('application'),
     ],
   },
   {
     method: 'PATCH',
     route: '/:id',
     handlers: [
-      applications.checkTable(),
+      auth.ensureUser(['admin']),
       applications.getApplication(),
       applications.patchApplication(),
-      common.cutResults('application'),
+      cutResults('application'),
     ],
   },
   {
     method: 'PUT',
     route: '/:id',
     handlers: [
-      applications.checkTable(),
+      auth.ensureUser(['admin']),
       applications.getApplication(),
       applications.updateApplication(),
-      common.cutResults('application'),
+      cutResults('application'),
     ],
   },
   {
     method: 'DELETE',
     route: '/:id',
     handlers: [
-      applications.checkTable(),
+      auth.ensureUser(['admin']),
       applications.getApplication(),
       applications.deleteApplication(),
-      common.cutResults('application'),
+      // cutResults('application'),
     ],
   },
 ]

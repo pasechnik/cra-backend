@@ -3,11 +3,12 @@ import fs from 'fs'
 import path from 'path'
 import sanitize from 'sanitize-filename'
 import { obj } from 'the-utils'
-import { mCheckTable, mGetEngine } from '../common/module'
+import { getCtxParam } from '../../modules/context'
+import { mCheckTable, mGetEngine } from '../../modules/db'
 
 const configDir = path.resolve(process.cwd(), 'configs')
 
-let engine = null
+const engine = null
 
 const error = debug('app:applications:module:error')
 const log = debug('app:applications:module')
@@ -52,5 +53,23 @@ export const parseField = (f) => {
   }
 
   return result
+}
+
+export const getForms = (dir, def) => async key => ({
+  [key]: fs.existsSync(dir) ? fs.readdirSync(dir)
+    .map(t => t.substr(0, t.lastIndexOf('.'))) : def,
+})
+
+export const parseForm = async (key, ctx) => {
+  const getBodyParam = getCtxParam(ctx, 'body')
+  const item = getBodyParam(key, {})
+  const inSchema = getBodyParam([key, 'schema'], {})
+
+  const schema = Object.keys(inSchema)
+    .reduce((a, b) => ({ ...a, [b]: parseField(inSchema[b]) }), {})
+
+  return {
+    [key]: { ...item, schema },
+  }
 }
 

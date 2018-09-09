@@ -1,7 +1,11 @@
+import debug from 'debug'
 import common from './env/common'
 import development from './env/development'
 import production from './env/production'
 import test from './env/tst'
+
+const error = debug('test:config:error')
+const log = debug('test:config')
 
 const env = process.env.NODE_ENV || 'development'
 let config = {}

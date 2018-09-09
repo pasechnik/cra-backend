@@ -1,6 +1,6 @@
 import * as users from './controller'
-import { cutResults } from '../common/controller'
-import { ensureUser } from '../../middleware/validators'
+import * as auth from '../auth/controller'
+import { cutResults } from '../../modules/context'
 
 export const baseUrl = '/v1/users'
 
@@ -9,20 +9,26 @@ export const routes = [
     method: 'GET',
     route: '/',
     handlers: [
-      users.checkTable(),
-      users.addFirstUser(),
-      ensureUser,
+      auth.ensureUser(),
       users.getUsers(),
       cutResults('users'),
     ],
   },
   {
+    method: 'GET',
+    route: '/clear',
+    handlers: [
+      auth.ensureUser(['admin']),
+      users.clearData(),
+      cutResults('users'),
+    ],
+  },
+
+  {
     method: 'POST',
     route: '/',
     handlers: [
-      users.checkTable(),
-      users.addFirstUser(),
-      ensureUser,
+      auth.ensureUser(),
       users.createUser(),
       cutResults('user'),
     ],
@@ -31,9 +37,7 @@ export const routes = [
     method: 'GET',
     route: '/:id',
     handlers: [
-      users.checkTable(),
-      users.addFirstUser(),
-      ensureUser,
+      auth.ensureUser(),
       users.getUser(),
       cutResults('user'),
     ],
@@ -42,9 +46,7 @@ export const routes = [
     method: 'PUT',
     route: '/:id',
     handlers: [
-      users.checkTable(),
-      users.addFirstUser(),
-      ensureUser,
+      auth.ensureUser(),
       // users.getUser(),
       users.updateUser(),
       cutResults('user'),
@@ -54,9 +56,7 @@ export const routes = [
     method: 'PATCH',
     route: '/:id',
     handlers: [
-      users.checkTable(),
-      users.addFirstUser(),
-      ensureUser,
+      auth.ensureUser(),
       users.getUser(),
       users.patchUser(),
       cutResults('user'),
@@ -66,9 +66,7 @@ export const routes = [
     method: 'DELETE',
     route: '/:id',
     handlers: [
-      users.checkTable(),
-      users.addFirstUser(),
-      ensureUser,
+      auth.ensureUser(),
       users.getUser(),
       users.deleteUser(),
       cutResults('user'),
