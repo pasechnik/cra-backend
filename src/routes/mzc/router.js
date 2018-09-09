@@ -10,7 +10,7 @@ export const routes = [
       mzc.getGeneralSettingsFront(),
     ],
   },
-  // http://{{backend}}/v1/mzc/mz_cashier_get_general_settings_front
+  // GET http://{{backend}}/v1/mzc/mz_cashier_get_general_settings_front
   {
     method: 'GET',
     route: '/mz_cashier_get_general_settings_front',
@@ -19,7 +19,7 @@ export const routes = [
       mzc.getSpreadResults('mzcs'),
     ],
   },
-  // http://{{backend}}/v1/mzc/mz_cashier_get_existing_cards/?&_dc=1536524330134&page=1&start=0&limit=25
+  // GET http://{{backend}}/v1/mzc/mz_cashier_get_existing_cards/?&_dc=1536524330134&page=1&start=0&limit=25
   {
     method: 'GET',
     route: '/mz_cashier_get_existing_cards',
@@ -28,7 +28,7 @@ export const routes = [
       mzc.getSpreadArrayResults('mzcs'),
     ],
   },
-  // http://{{backend}}/v1/mzc/mz_cashier_get_countries/?&_dc=1536524330134&page=1&start=0&limit=25
+  // GET http://{{backend}}/v1/mzc/mz_cashier_get_countries/?&_dc=1536524330134&page=1&start=0&limit=25
   {
     method: 'GET',
     route: '/mz_cashier_get_countries',
@@ -37,7 +37,7 @@ export const routes = [
       mzc.getSpreadResults('mzcs'),
     ],
   },
-  // http://{{backend}}/v1/mzc/mz_cashier_get_pago_countries/?&_dc=1536524330134&page=1&start=0&limit=25
+  // GET http://{{backend}}/v1/mzc/mz_cashier_get_pago_countries/?&_dc=1536524330134&page=1&start=0&limit=25
   {
     method: 'GET',
     route: '/mz_cashier_get_pago_countries',
