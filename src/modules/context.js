@@ -5,6 +5,8 @@ import json from 'json-promise'
 const error = debug('app:module:context:error')
 const log = debug('app:module:context')
 
+export const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
 export const isFunction = functionToCheck => functionToCheck
   && {}.toString.call(functionToCheck) === '[object Function]'
 

@@ -33,7 +33,6 @@ export const routes = [
       application.checkTable(),
       settings.checkTable(),
       auth.ensureUser(['admin']),
-
       application.clearData(),
       settings.clearData(),
       // cutResults('clear'),

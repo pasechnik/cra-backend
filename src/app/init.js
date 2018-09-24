@@ -4,6 +4,7 @@ import { fReadDir } from '../modules/file'
 import { dbImport } from '../modules/db'
 import config from '../config'
 import { checkTables } from '../modules/tables'
+import { delay } from '../modules/context'
 
 const error = debug('app:init:error')
 const log = debug('app:init')
@@ -27,8 +28,6 @@ export const offlineData = async (force = false) => {
     throw (err)
   }
 }
-
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 const spinoff = async (ms, f) => {
   try {

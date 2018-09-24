@@ -59,6 +59,14 @@ export const routes = [
       mzc.getSpreadResults('mzcs'),
     ],
   },
+  {
+    method: 'GET',
+    route: '/mz_test',
+    handlers: [
+      mzc.getTest(),
+      mzc.getSpreadResults('mzcs'),
+    ],
+  },
 
 ]
 
