@@ -7,8 +7,8 @@ const log = debug('app:module:context')
 
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-export const isFunction = functionToCheck => functionToCheck
-  && {}.toString.call(functionToCheck) === '[object Function]'
+export const isFunction = functionToCheck =>
+  functionToCheck && {}.toString.call(functionToCheck) === '[object Function]'
 
 export const retError = message => ({ type: 'error', message })
 export const retInfo = message => ({ type: 'info', message })
@@ -52,8 +52,7 @@ export const getPost = target => async (key, ctx) => {
 
 export const map = (from, c) => async (key, ctx) => {
   const getBodyParam = getCtxParam(ctx, 'body')
-  const item = getBodyParam(from, [])
-    .map(t => c(t))
+  const item = getBodyParam(from, []).map(t => c(t))
 
   // log('item')
   // log({ item, key })

@@ -18,13 +18,13 @@ passport.deserializeUser((id, done) => {
     .catch(() => done('error searching for user id', null))
 })
 
-passport.use(new Strategy(
-  (username, password, done) => {
+passport.use(
+  new Strategy((username, password, done) => {
     // log('passport.use')
     const e = getEngine()
     e.getAll()
       .then(users => users.find(u => u.username === username))
-      .then((user) => {
+      .then(user => {
         if (user === undefined) {
           return done(null, false, { message: 'Incorrect username or password' })
         }
@@ -35,8 +35,7 @@ passport.use(new Strategy(
         return done(null, false, { message: 'Incorrect username or password' })
       })
       .catch(() => done('error searching user and password', null))
-  }
-))
-
+  }),
+)
 
 export default passport

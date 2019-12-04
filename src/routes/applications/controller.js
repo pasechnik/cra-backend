@@ -1,10 +1,7 @@
 import path from 'path'
 import { cast, patch, output } from '../../models/application'
 import { getEngine, runCheckTable } from './module'
-import {
-  runFunction, runOutput, parseJson,
-  bodyFind, getCtxParam,
-} from '../../modules/context'
+import { runFunction, runOutput, parseJson, bodyFind, getCtxParam } from '../../modules/context'
 import { fReadFile2 } from '../../modules/file'
 import { dbGetAll, dbCreate, dbGetOne, dbUpdate, dbPatch, dbDelete, dbClear } from '../../modules/db'
 import config from '../../config'
@@ -21,14 +18,17 @@ export const patchApplication = () => runOutput(routeKey, dbPatch(getEngine, cas
 export const deleteApplication = () => runOutput(routeKey, dbDelete(getEngine, cast, output))
 export const clearData = () => runOutput(routeKeys, dbClear(getEngine, cast))
 // (src, subj, callback) => async (key, ctx)
-export const findApp = () => runOutput(routeKey, bodyFind(
-  routeKeys,
-  (key, ctx, def) => getCtxParam(ctx, 'params')('id', def),
-  id => t => t.id === id
-))
-export const getLocalApplications = () => runOutput(routeKeys, fReadFile2(
-  'applications',
-  () => path.resolve(process.cwd(), config.applications),
-  [],
-  parseJson
-))
+export const findApp = () =>
+  runOutput(
+    routeKey,
+    bodyFind(
+      routeKeys,
+      (key, ctx, def) => getCtxParam(ctx, 'params')('id', def),
+      id => t => t.id === id,
+    ),
+  )
+export const getLocalApplications = () =>
+  runOutput(
+    routeKeys,
+    fReadFile2('applications', () => path.resolve(process.cwd(), config.applications), [], parseJson),
+  )

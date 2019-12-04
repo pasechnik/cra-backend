@@ -9,22 +9,12 @@ export const routes = [
   {
     method: 'GET',
     route: '/',
-    handlers: [
-      settings.checkTable(),
-      auth.ensureUser(),
-      settings.getSettings(),
-      cutResults('settings'),
-    ],
+    handlers: [settings.checkTable(), auth.ensureUser(), settings.getSettings(), cutResults('settings')],
   },
   {
     method: 'POST',
     route: '/',
-    handlers: [
-      settings.checkTable(),
-      auth.ensureUser(['admin']),
-      settings.createSetting(),
-      cutResults('settings'),
-    ],
+    handlers: [settings.checkTable(), auth.ensureUser(['admin']), settings.createSetting(), cutResults('settings')],
   },
   {
     method: 'GET',
@@ -41,38 +31,22 @@ export const routes = [
   {
     method: 'GET',
     route: '/version',
-    handlers: [
-      auth.ensureUser(),
-      settings.getVersion(),
-      cutResults('settings'),
-    ],
+    handlers: [auth.ensureUser(), settings.getVersion(), cutResults('settings')],
   },
   {
     method: 'GET',
     route: '/dashboard',
-    handlers: [
-      auth.ensureUser(),
-      settings.getDashboard(),
-      cutResults('dashboard'),
-    ],
+    handlers: [auth.ensureUser(), settings.getDashboard(), cutResults('dashboard')],
   },
   {
     method: 'POST',
     route: '/offline',
-    handlers: [
-      settings.importOffline(),
-      cutResults('settings'),
-    ],
+    handlers: [settings.importOffline(), cutResults('settings')],
   },
   {
     method: 'GET',
     route: '/:id',
-    handlers: [
-      settings.checkTable(),
-      auth.ensureUser(),
-      settings.getSetting(),
-      cutResults('settings'),
-    ],
+    handlers: [settings.checkTable(), auth.ensureUser(), settings.getSetting(), cutResults('settings')],
   },
   {
     method: 'PATCH',

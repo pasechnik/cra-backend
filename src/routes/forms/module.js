@@ -16,7 +16,6 @@ const log = debug('app:applications:module')
 export const getEngine = () => mGetEngine('forms')
 export const runCheckTable = async () => mCheckTable('forms')
 
-
 export const readFile = (dir, filename) => {
   const file = path.resolve(dir, filename)
   if (fs.existsSync(file)) {
@@ -25,7 +24,7 @@ export const readFile = (dir, filename) => {
   return ''
 }
 
-export const fieldSelectFile = (f) => {
+export const fieldSelectFile = f => {
   const { src = '', ...result } = f
   result.type = 'Select'
   result.options = []
@@ -42,7 +41,7 @@ export const fieldSelectFile = (f) => {
   return result
 }
 
-export const parseField = (f) => {
+export const parseField = f => {
   const type = obj.get(f, 'type', 'Text')
   let result = { ...f }
   switch (type) {
@@ -56,8 +55,7 @@ export const parseField = (f) => {
 }
 
 export const getForms = (dir, def) => async key => ({
-  [key]: fs.existsSync(dir) ? fs.readdirSync(dir)
-    .map(t => t.substr(0, t.lastIndexOf('.'))) : def,
+  [key]: fs.existsSync(dir) ? fs.readdirSync(dir).map(t => t.substr(0, t.lastIndexOf('.'))) : def,
 })
 
 export const parseForm = async (key, ctx) => {
@@ -65,11 +63,9 @@ export const parseForm = async (key, ctx) => {
   const item = getBodyParam(key, {})
   const inSchema = getBodyParam([key, 'schema'], {})
 
-  const schema = Object.keys(inSchema)
-    .reduce((a, b) => ({ ...a, [b]: parseField(inSchema[b]) }), {})
+  const schema = Object.keys(inSchema).reduce((a, b) => ({ ...a, [b]: parseField(inSchema[b]) }), {})
 
   return {
     [key]: { ...item, schema },
   }
 }
-

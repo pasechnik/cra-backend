@@ -8,39 +8,23 @@ export const routes = [
   {
     method: 'GET',
     route: '/',
-    handlers: [
-      auth.ensureUser(),
-      users.getUsers(),
-      cutResults('users'),
-    ],
+    handlers: [auth.ensureUser(), users.getUsers(), cutResults('users')],
   },
   {
     method: 'GET',
     route: '/clear',
-    handlers: [
-      auth.ensureUser(['admin']),
-      users.clearData(),
-      cutResults('users'),
-    ],
+    handlers: [auth.ensureUser(['admin']), users.clearData(), cutResults('users')],
   },
 
   {
     method: 'POST',
     route: '/',
-    handlers: [
-      auth.ensureUser(),
-      users.createUser(),
-      cutResults('user'),
-    ],
+    handlers: [auth.ensureUser(), users.createUser(), cutResults('user')],
   },
   {
     method: 'GET',
     route: '/:id',
-    handlers: [
-      auth.ensureUser(),
-      users.getUser(),
-      cutResults('user'),
-    ],
+    handlers: [auth.ensureUser(), users.getUser(), cutResults('user')],
   },
   {
     method: 'PUT',
@@ -55,24 +39,13 @@ export const routes = [
   {
     method: 'PATCH',
     route: '/:id',
-    handlers: [
-      auth.ensureUser(),
-      users.getUser(),
-      users.patchUser(),
-      cutResults('user'),
-    ],
+    handlers: [auth.ensureUser(), users.getUser(), users.patchUser(), cutResults('user')],
   },
   {
     method: 'DELETE',
     route: '/:id',
-    handlers: [
-      auth.ensureUser(),
-      users.getUser(),
-      users.deleteUser(),
-      cutResults('user'),
-    ],
+    handlers: [auth.ensureUser(), users.getUser(), users.deleteUser(), cutResults('user')],
   },
-
 ]
 
 export default { baseUrl, routes }

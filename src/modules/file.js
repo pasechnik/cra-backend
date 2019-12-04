@@ -10,18 +10,16 @@ export const fReadDir = (filename, mask) => {
   const file = mPath.resolve(process.cwd(), filename)
   log(file)
   if (fs.existsSync(file)) {
-    return fs.readdirSync(file)
-      .filter(t => mask === undefined || mask.test(t))
+    return fs.readdirSync(file).filter(t => mask === undefined || mask.test(t))
   }
   return []
 }
 
-export const readFile = (filename, def, cb) => async (key) => {
+export const readFile = (filename, def, cb) => async key => {
   const file = mPath.resolve(process.cwd(), filename)
   log(file)
   if (fs.existsSync(file)) {
-    let result = fs.readFileSync(file, 'utf8')
-      .trim()
+    let result = fs.readFileSync(file, 'utf8').trim()
     if (cb !== undefined) {
       result = await cb(result)
     }
@@ -39,8 +37,7 @@ export const fReadFile = async (id, fPathResolve, def, cb) => {
   let content = def
   if (fileExists) {
     log(`file: ${id} exists`)
-    content = fs.readFileSync(file, 'utf8')
-      .trim()
+    content = fs.readFileSync(file, 'utf8').trim()
   } else {
     log(`file: ${id} does not exist`)
     log('trying default')
@@ -48,8 +45,7 @@ export const fReadFile = async (id, fPathResolve, def, cb) => {
     const fileDefaultExists = fileDefault !== undefined ? fs.existsSync(fileDefault) : false
     if (fileDefaultExists) {
       log(`file: ${fileDefault} exists`)
-      content = fs.readFileSync(fileDefault, 'utf8')
-        .trim()
+      content = fs.readFileSync(fileDefault, 'utf8').trim()
     }
   }
 
@@ -65,8 +61,7 @@ export const fReadFile2 = (fGetParam, fPathResolve, def, cb) => async (key, ctx)
   let content = def
   if (fileExists) {
     log(`file: ${id} exists`)
-    content = fs.readFileSync(file, 'utf8')
-      .trim()
+    content = fs.readFileSync(file, 'utf8').trim()
   } else {
     log(`file: ${id} does not exist`)
     log('trying default')
@@ -74,8 +69,7 @@ export const fReadFile2 = (fGetParam, fPathResolve, def, cb) => async (key, ctx)
     const fileDefaultExists = fileDefault !== undefined ? fs.existsSync(fileDefault) : false
     if (fileDefaultExists) {
       log(`file: ${fileDefault} exists`)
-      content = fs.readFileSync(fileDefault, 'utf8')
-        .trim()
+      content = fs.readFileSync(fileDefault, 'utf8').trim()
     }
   }
 

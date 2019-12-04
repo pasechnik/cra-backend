@@ -8,38 +8,22 @@ export const routes = [
   {
     method: 'GET',
     route: '/',
-    handlers: [
-      auth.ensureUser(),
-      applications.getApplications(),
-      cutResults('applications'),
-    ],
+    handlers: [auth.ensureUser(), applications.getApplications(), cutResults('applications')],
   },
   {
     method: 'POST',
     route: '/',
-    handlers: [
-      auth.ensureUser(['admin']),
-      applications.createApplication(),
-      cutResults('application'),
-    ],
+    handlers: [auth.ensureUser(['admin']), applications.createApplication(), cutResults('application')],
   },
   {
     method: 'GET',
     route: '/clear',
-    handlers: [
-      auth.ensureUser(['admin']),
-      applications.clearData(),
-      cutResults('applications'),
-    ],
+    handlers: [auth.ensureUser(['admin']), applications.clearData(), cutResults('applications')],
   },
   {
     method: 'GET',
     route: '/:id',
-    handlers: [
-      auth.ensureUser(),
-      applications.getApplication(),
-      cutResults('application'),
-    ],
+    handlers: [auth.ensureUser(), applications.getApplication(), cutResults('application')],
   },
   {
     method: 'PATCH',

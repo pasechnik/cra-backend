@@ -14,10 +14,10 @@ stages:
   - build
 
 services:
-- docker:dind
+  - docker:dind
 
 before_script:
-- docker info
+  - docker info
 
 # This template adds the boilerplate for interacting with gitlab's docker registry
 .docker_registry_template: &docker_registry
@@ -34,7 +34,7 @@ docker-build-branch:
   <<: *docker_registry
   script:
     - docker build --cache-from $LATEST_IMAGE -t $CONTAINER_IMAGE .
-#    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $CONTAINER_IMAGE
   only:
     - branches
@@ -46,7 +46,7 @@ docker-build-tag:
   <<: *docker_registry
   script:
     - docker build --cache-from $LATEST_IMAGE -t $CONTAINER_TAG .
-#    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $CONTAINER_TAG
   only:
     - tags
@@ -56,9 +56,7 @@ docker-build-latest:
   <<: *docker_registry
   script:
     - docker build --cache-from $LATEST_IMAGE -t $LATEST_IMAGE .
-#    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $LATEST_IMAGE
   only:
     - master
-
-

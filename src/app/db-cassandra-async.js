@@ -15,7 +15,7 @@ const connect = keyspace => new cassandra.Client({ ...config.cassandra, keyspace
  * the **same** promise, so it can be called any number of times without setting
  * up a new connection every time.
  */
-const connection = (keyspace) => {
+const connection = keyspace => {
   if (!obj.has(connections, keyspace)) {
     connections = obj.set(connections, keyspace, connect(keyspace))
   }

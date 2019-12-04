@@ -12,7 +12,7 @@ export class Storage {
   constructor(name) {
     this.io = null
     this.cache = null
-    const Name = (name === undefined ? 'rooms' : name)
+    const Name = name === undefined ? 'rooms' : name
     this.roomConfigTemplate = RoomConfig.cast({})
     this.roomTemplate = Room.cast({})
     this.roomStateTemplate = RoomState.cast({})
@@ -87,7 +87,9 @@ export class Storage {
       // const state = await this.getRoomState(room)
 
       return { ...data, fields: config.selectedFields }
-    } catch (e) { error(e) }
+    } catch (e) {
+      error(e)
+    }
   }
 
   /**
@@ -102,7 +104,9 @@ export class Storage {
       log('get room data', room)
       const data = await this.prepareRoomData(room)
       return data
-    } catch (e) { error(e) }
+    } catch (e) {
+      error(e)
+    }
   }
 
   /**
@@ -233,7 +237,6 @@ export class Storage {
   //
   //   return true
   // }
-
 }
 
 export default Storage

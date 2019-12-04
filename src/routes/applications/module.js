@@ -6,4 +6,3 @@ import { mCheckTable, mGetEngine } from '../../modules/db'
 
 export const getEngine = () => mGetEngine('applications')
 export const runCheckTable = async (key, ctx) => mCheckTable('applications')
-

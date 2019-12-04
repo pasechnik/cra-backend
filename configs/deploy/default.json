@@ -17,23 +17,13 @@
     "parameterLevel": {
       "type": "Select",
       "title": "Choose level:",
-      "options": [
-        "None",
-        "One",
-        "Two",
-        "Three"
-      ]
+      "options": ["None", "One", "Two", "Three"]
     }
   },
   "fieldsets": [
     {
       "legend": false,
-      "fields": [
-        "location",
-        "parameterMax",
-        "parameterMin",
-        "parameterLevel"
-      ]
+      "fields": ["location", "parameterMax", "parameterMin", "parameterLevel"]
     }
   ],
   "defaults": {

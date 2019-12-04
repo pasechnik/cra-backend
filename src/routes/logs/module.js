@@ -12,7 +12,7 @@ export const getEngine = () => mGetEngine('logs')
 export const runCheckTable = async () => mCheckTable('logs')
 const checkTable = () => runFunction('logs', runCheckTable)
 
-export const logAction = async (props) => {
+export const logAction = async props => {
   let result = ''
 
   try {
@@ -20,7 +20,7 @@ export const logAction = async (props) => {
     const e = getEngine()
     await e.createTable()
 
-    const d = (new Date()).getTime()
+    const d = new Date().getTime()
 
     const logItem = cast(props)
     logItem.date = d
@@ -36,14 +36,13 @@ export const logAction = async (props) => {
   return result
 }
 
-export const logError = async ({
-  action, server, params, message,
-}) => logAction({
-  action,
-  status: 'error',
-  username: 'admin',
-  server: obj.get(server, 'namespace', ''),
-  parameters: params,
-  serverId: obj.get(server, 'id', ''),
-  description: message,
-})
+export const logError = async ({ action, server, params, message }) =>
+  logAction({
+    action,
+    status: 'error',
+    username: 'admin',
+    server: obj.get(server, 'namespace', ''),
+    parameters: params,
+    serverId: obj.get(server, 'id', ''),
+    description: message,
+  })

@@ -209,11 +209,9 @@ export class Engine {
       if (obj.isEmpty(q)) {
         return 0
       }
-      const param = Object.keys(q)
-        .shift()
+      const param = Object.keys(q).shift()
 
-      const items = (await this.getAll())
-        .filter(i => i[param] === q[param])
+      const items = (await this.getAll()).filter(i => i[param] === q[param])
 
       await Promise.all(items.map(i => this.delete(i.id)))
       return items.length
@@ -250,7 +248,6 @@ export class Engine {
       throw e
     }
   }
-
 }
 
 export default Engine

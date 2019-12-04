@@ -8,20 +8,12 @@ export const routes = [
   {
     method: 'GET',
     route: '/',
-    handlers: [
-      auth.ensureUser(),
-      forms.getForms(),
-    ],
+    handlers: [auth.ensureUser(), forms.getForms()],
   },
   {
     method: 'GET',
     route: '/:id',
-    handlers: [
-      auth.ensureUser(),
-      forms.getForm(),
-      forms.parseForm(),
-      spreadResults('form'),
-    ],
+    handlers: [auth.ensureUser(), forms.getForm(), forms.parseForm(), spreadResults('form')],
   },
 ]
 

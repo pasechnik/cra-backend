@@ -25,12 +25,11 @@ export class Engine {
         this.data[key] = item
         delete item.id
         resolve({ numAffected: 1, affectedDocuments: item, upsert: true })
-          // resolve(1, item, true)
+        // resolve(1, item, true)
       } catch (e) {
         reject(e.message)
       }
-    }
-    )
+    })
   }
 
   get(key, def = null) {
@@ -56,10 +55,7 @@ export class Engine {
   getAll(q) {
     return new Promise((resolve, reject) => {
       try {
-        resolve(
-          q !== undefined && q.length ? obj.toArrayFilter(this.data, new RegExp(q))
-            : obj.toArray(this.data)
-        )
+        resolve(q !== undefined && q.length ? obj.toArrayFilter(this.data, new RegExp(q)) : obj.toArray(this.data))
       } catch (e) {
         reject(e.message)
       }
@@ -103,8 +99,9 @@ export class Engine {
     return new Promise((resolve, reject) => {
       try {
         resolve(
-          q !== undefined && q.length ? obj.toArrayFilter(this.data, new RegExp(q)).length
-            : obj.toArray(this.data).length
+          q !== undefined && q.length
+            ? obj.toArrayFilter(this.data, new RegExp(q)).length
+            : obj.toArray(this.data).length,
         )
       } catch (e) {
         reject(e.message)
