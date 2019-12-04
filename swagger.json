@@ -1,0 +1,1046 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Backend API",
+    "description": "TODO: Add Description",
+    "license": {
+      "name": "MIT",
+      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
+    }
+  },
+  "host": "{DefaultParameterValue}",
+  "basePath": "/v1",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/servers": {
+      "get": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/servers",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/servers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/servers",
+              "headers": {
+                "Accept": "*/*"
+              }
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/servers",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/servers/": {
+      "post": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/servers",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/servers1",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/~1v1~1serversrequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "POST",
+              "uri": "/servers/",
+              "headers": {
+                "Content-Type": "application/json",
+                "Accept": "*/*"
+              },
+              "body": "{\n\t\t\"server\":{\n            \"id\": \"22cb4fb6-d9a7-4dda-9325-80489c9850af\",\n            \"status\": \"Deployed\",\n            \"jobStatus\": \"SUCCEEDED\",\n            \"cCMTSName\": \"sm-test\",\n            \"location\": \"Denver\",\n            \"cluster\": \"172.22.16.62\",\n            \"bom\": \"1.0.0\",\n            \"infoUrl\": \"/pipelines/22cb4fb6-d9a7-4dda-9325-80489c9850af\",\n            \"progress\": 100,\n            \"uptime\": \"New\",\n            \"depDate\": \"7/6/2017, 3:00:56 AM\",\n            \"action\": \"\"\n        }\n}"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/servers1",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/servers/22cb4fb6-d9a7-4dda-9325-80489c985000": {
+      "get": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/servers/:id",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/servers/:id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/servers/22cb4fb6-d9a7-4dda-9325-80489c985000",
+              "headers": {
+                "Accept": "*/*",
+                "Content-Type": "application/json"
+              }
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/servers/:id",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/servers/22cb4fb6-d9a7-4dda-9325-80489c985111": {
+      "put": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/servers/:id",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/servers/:id1",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/~1v1~1serversrequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "PUT",
+              "uri": "/servers/22cb4fb6-d9a7-4dda-9325-80489c985111",
+              "headers": {
+                "Content-Type": "application/json",
+                "Accept": "*/*"
+              },
+              "body": "{\n\t\t\"server\":{\n            \"id\": \"22cb4fb6-d9a7-4dda-9325-80489c9850af\",\n            \"status\": \"Running\",\n            \"jobStatus\": \"SUCCEEDED\",\n            \"cCMTSName\": \"sm-test-1\",\n            \"location\": \"Denver\",\n            \"cluster\": \"172.22.16.62\",\n            \"bom\": \"1.0.1\",\n            \"infoUrl\": \"/pipelines/22cb4fb6-d9a7-4dda-9325-80489c9850af\",\n            \"progress\": 100,\n            \"uptime\": \"1h\",\n            \"depDate\": \"7/6/2017, 3:00:56 AM\",\n            \"action\": \"\"\n        }\n}"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/servers/:id1",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/servers/22cb4fb6-d9a7-4dda-9325-80489c985999": {
+      "delete": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/servers/:id",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/servers/:id2",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "DELETE",
+              "uri": "/servers/22cb4fb6-d9a7-4dda-9325-80489c985999",
+              "headers": {
+                "Accept": "*/*",
+                "Content-Type": "application/json"
+              }
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/servers/:id2",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/env": {
+      "get": {
+        "description": "TODO: Add Description",
+        "summary": "http://localhost:3000/env",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "http://localhost:3000/env",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/env",
+              "headers": {
+                "Accept": "*/*"
+              }
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "http://localhost:3000/env",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/gates": {
+      "get": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/gates",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/gates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/gates",
+              "headers": {
+                "Accept": "*/*"
+              }
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/gates",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/gates/": {
+      "post": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/gates",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/gates1",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/~1v1~1gatesrequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "POST",
+              "uri": "/gates/",
+              "headers": {
+                "Content-Type": "application/json",
+                "Accept": "*/*"
+              },
+              "body": "{\n\t\t\"gate\":{\n            \"active\": \"true\",\n            \"name\": \"second\",\n            \"address\": \"http://172.22.16.87:9000/gate\"\n        }\n}"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/gates1",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/gates/822912ff-1f73-42b4-8aa3-0e2f06da43a5": {
+      "get": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/gates/:id",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/gates/:id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/gates/822912ff-1f73-42b4-8aa3-0e2f06da43a5",
+              "headers": {
+                "Accept": "*/*",
+                "Content-Type": "application/json"
+              }
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/gates/:id",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      },
+      "put": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/gates/:id",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/gates/:id1",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/~1v1~1gates~1:idrequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "PUT",
+              "uri": "/gates/822912ff-1f73-42b4-8aa3-0e2f06da43a5",
+              "headers": {
+                "Content-Type": "application/json",
+                "Accept": "*/*"
+              },
+              "body": "{\n\t\t\"gate\":{\n            \"id\": \"822912ff-1f73-42b4-8aa3-0e2f06da43a5\",\n            \"active\": \"false\",\n            \"name\": \"second\",\n            \"address\": \"http://172.22.16.87:9000/gate\"\n        }\n}"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/gates/:id1",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      },
+      "delete": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/gates/:id",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/gates/:id2",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "DELETE",
+              "uri": "/gates/822912ff-1f73-42b4-8aa3-0e2f06da43a5",
+              "headers": {
+                "Accept": "*/*",
+                "Content-Type": "application/json"
+              }
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/gates/:id2",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/gates/8c8aead5-3ff5-4d3e-a25c-9baff6e0659e": {
+      "patch": {
+        "description": "TODO: Add Description",
+        "summary": "/v1/gates/:id",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "/v1/gates/:id3",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/~1v1~1gates~1:idrequest8"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "PATCH",
+              "uri": "/gates/8c8aead5-3ff5-4d3e-a25c-9baff6e0659e",
+              "headers": {
+                "Content-Type": "application/json",
+                "Accept": "*/*"
+              },
+              "body": "{\n\t\t\"gate\":{\n            \"active\": \"false\"\n        }\n}"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "/v1/gates/:id3",
+            "x-testDescription": "TODO: Add Description"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    }
+  },
+  "definitions": {
+    "/v1/serversrequest": {
+      "title": "/v1/serversRequest",
+      "example": {
+        "server": {
+          "id": "22cb4fb6-d9a7-4dda-9325-80489c9850af",
+          "status": "Deployed",
+          "jobStatus": "SUCCEEDED",
+          "cCMTSName": "sm-test",
+          "location": "Denver",
+          "cluster": "172.22.16.62",
+          "bom": "1.0.0",
+          "infoUrl": "/pipelines/22cb4fb6-d9a7-4dda-9325-80489c9850af",
+          "progress": 100,
+          "uptime": "New",
+          "depDate": "7/6/2017, 3:00:56 AM",
+          "action": ""
+        }
+      },
+      "type": "object",
+      "properties": {
+        "server": {
+          "$ref": "#/definitions/Server"
+        }
+      },
+      "required": [
+        "server"
+      ]
+    },
+    "Server": {
+      "title": "Server",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "",
+          "type": "string"
+        },
+        "status": {
+          "description": "",
+          "type": "string"
+        },
+        "jobStatus": {
+          "description": "",
+          "type": "string"
+        },
+        "cCMTSName": {
+          "description": "",
+          "type": "string"
+        },
+        "location": {
+          "description": "",
+          "type": "string"
+        },
+        "cluster": {
+          "description": "",
+          "type": "string"
+        },
+        "bom": {
+          "description": "",
+          "type": "string"
+        },
+        "infoUrl": {
+          "description": "",
+          "type": "string"
+        },
+        "progress": {
+          "description": "",
+          "type": "integer",
+          "format": "int32"
+        },
+        "uptime": {
+          "description": "",
+          "type": "string"
+        },
+        "depDate": {
+          "description": "",
+          "type": "string"
+        },
+        "action": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "jobStatus",
+        "cCMTSName",
+        "location",
+        "cluster",
+        "bom",
+        "infoUrl",
+        "progress",
+        "uptime",
+        "depDate",
+        "action"
+      ]
+    },
+    "/v1/gatesrequest": {
+      "title": "/v1/gatesRequest",
+      "example": {
+        "gate": {
+          "active": "true",
+          "name": "second",
+          "address": "http://172.22.16.87:9000/gate"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "gate": {
+          "$ref": "#/definitions/Gate"
+        }
+      },
+      "required": [
+        "gate"
+      ]
+    },
+    "Gate": {
+      "title": "Gate",
+      "type": "object",
+      "properties": {
+        "active": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "address": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "required": [
+        "active",
+        "name",
+        "address"
+      ]
+    },
+    "/v1/gates/:idrequest": {
+      "title": "/v1/gates/:idRequest",
+      "example": {
+        "gate": {
+          "id": "822912ff-1f73-42b4-8aa3-0e2f06da43a5",
+          "active": "false",
+          "name": "second",
+          "address": "http://172.22.16.87:9000/gate"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "gate": {
+          "$ref": "#/definitions/Gate7"
+        }
+      },
+      "required": [
+        "gate"
+      ]
+    },
+    "Gate7": {
+      "title": "Gate7",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "",
+          "type": "string"
+        },
+        "active": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "address": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "active",
+        "name",
+        "address"
+      ]
+    },
+    "/v1/gates/:idrequest8": {
+      "title": "/v1/gates/:idRequest8",
+      "example": {
+        "gate": {
+          "active": "false"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "gate": {
+          "$ref": "#/definitions/Gate9"
+        }
+      },
+      "required": [
+        "gate"
+      ]
+    },
+    "Gate9": {
+      "title": "Gate9",
+      "type": "object",
+      "properties": {
+        "active": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "required": [
+        "active"
+      ]
+    }
+  }
+}

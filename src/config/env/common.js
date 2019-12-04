@@ -1,7 +1,7 @@
-import debug from 'debug'
+import debug from 'debug';
 
-const error = debug('app:config:error')
-const log = debug('app:config')
+const error = debug('app:config:error');
+const log = debug('app:config');
 
 const config = {
   env: 'production',
@@ -9,10 +9,13 @@ const config = {
   secureport: process.env.HTPPS_PORT || 4443,
   // cache: { name: 'roomsConfig' },
   // storage: { name: 'rooms' },
-  cassandra: { contactPoints: [process.env.CASSANDRA || '1.0.0.1'], keyspace: 'cra' },
+  cassandra: {
+    contactPoints: [process.env.CASSANDRA || '1.0.0.1'],
+    keyspace: 'cra',
+  },
   VERSION: 'VERSION',
   offlineConfigs: './configs/offline',
-}
+};
 
-log({ config })
-export default config
+log({ config });
+export default config;

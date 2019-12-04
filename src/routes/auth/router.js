@@ -1,6 +1,6 @@
-import * as auth from './controller'
+import * as auth from './controller';
 
-export const baseUrl = '/v1/auth'
+export const baseUrl = '/v1/auth';
 
 export const routes = [
   {
@@ -11,6 +11,9 @@ export const routes = [
       auth.authUser(),
     ],
   },
-]
+];
 
-export default { routes, baseUrl }
+export default {
+  routes,
+  baseUrl,
+};

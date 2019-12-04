@@ -2,7 +2,6 @@ import Router from 'koa-router'
 import debug from 'debug'
 import auth from './auth/router'
 import applications from './applications/router'
-import mzc from './mzc/router'
 import logs from './logs/router'
 import models from './models/router'
 import settings from './settings/router'
@@ -41,7 +40,6 @@ export const init = (app) => {
     applications,
     logs,
     models,
-    mzc,
     settings,
     tests,
     users,
