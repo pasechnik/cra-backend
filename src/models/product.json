@@ -1,0 +1,8 @@
+{
+  "product": {
+    "name": "Testing product",
+    "categoryId": "{{cat_id}}",
+    "price": 100.0,
+    "description": "Product that was created with testing purpose"
+  }
+}

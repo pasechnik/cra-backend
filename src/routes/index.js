@@ -2,8 +2,10 @@ import debug from 'debug'
 import Router from 'koa-router'
 import applications from './applications/router'
 import auth from './auth/router'
+import categories from './categories/router'
 import logs from './logs/router'
 import models from './models/router'
+import products from './products/router'
 import settings from './settings/router'
 import tests from './tsts/router'
 import users from './users/router'
@@ -28,6 +30,7 @@ const injectRoute = (app, routeConfig) => {
   })
 }
 
-export const init = app => [auth, applications, logs, models, settings, tests, users].forEach(r => injectRoute(app, r))
+export const init = app =>
+  [applications, auth, categories, logs, models, products, settings, tests, users].forEach(r => injectRoute(app, r))
 
 export default init

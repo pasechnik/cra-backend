@@ -68,7 +68,7 @@ export const bodyFilter = (src, subj, callback) => async (key, ctx) => {
   const items = getBodyParam(key, [])
 
   log({ key, subject, items })
-  const result = items.filter(callback(subject))
+  const result = items.filter(callback(subject)) || []
 
   return {
     [key]: result,

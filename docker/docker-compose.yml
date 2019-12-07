@@ -4,6 +4,8 @@ services:
   cassandra_db:
     image: cassandra:latest
     container_name: cassandra_db
+    domainname: cra.xyz
+    hostname: db
     ports:
       - 7000:7000
       - 7001:7001
@@ -12,6 +14,8 @@ services:
       - 9160:9160
     environment:
       - CASSANDRA_START_RPC=true
+# -------------------------------
+
 # docker run --name reaper -d smartcat/cassandra-reaper -p 8090:8090 -p 8091:8091
 #   reaper:
 #     image: smartcat/cassandra-reaper
@@ -25,9 +29,10 @@ services:
 #       - 8090:8090
 #       - 8091:8091
 
+# -------------------------------
 #    volumes:
 #      - ./cassandra-reaper.yaml:/opt/cassandra-reaper/cassandra-reaper.yaml:ro#  backend:
-#    image: tricorder-ui-backend/image
+#    image: cra-backend/image
 #    container_name: backend
 #    hostname: backend.xyz
 #    build:
@@ -41,14 +46,16 @@ services:
 #    depends_on:
 #      - cassandra
 
+# -------------------------------
+
 #  frontend:
-#    image: tricorder-ui-framework/image
+#    image: cra-boiler/image
 #    container_name: frontend
 #    hostname: frontend.xyz
 #    depends_on:
 #      - backend
 #    build:
-#      context: ../../tricorder-ui-framework
+#      context: ../../cra-boiler
 #      dockerfile: Dockerfile
 #    environment:
 #      - UI_BACKEND=127.0.0.1:4060
