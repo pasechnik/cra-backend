@@ -25,7 +25,7 @@ export const offlineData = async (force = false) => {
       await updateSettings({ ...settings, initialized: true })
     }
   } catch (err) {
-    throw (err)
+    throw err
   }
 }
 
@@ -36,7 +36,7 @@ const spinoff = async (ms, f) => {
     log(`Waited ${ms} ms`)
     return f()
   } catch (err) {
-    throw (err)
+    throw err
   }
 }
 

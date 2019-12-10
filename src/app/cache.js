@@ -4,9 +4,7 @@ import debug from 'debug'
 import { obj } from 'the-utils'
 import { Engine as CassEngine } from './engine-cassandra-async'
 import { Engine as Memory } from './engine-object-async'
-import {
-  roomConfig as modelRoomConfig, room as modelRoom, roomState as modelRoomState,
-} from '../models'
+import { roomConfig as modelRoomConfig, room as modelRoom, roomState as modelRoomState } from '../models'
 
 const dbGates = new CassEngine('gates', 'user')
 
@@ -46,17 +44,17 @@ export class Cache {
     try {
       const configs = await this.getAllRoomConfigs()
       const states = await Promise.all(
-        configs.map(
-          (c) => {
-            if (c.autostart === true) {
-              return this.startOn(c)
-            }
-            return this.getRoomState(c.name)
+        configs.map(c => {
+          if (c.autostart === true) {
+            return this.startOn(c)
           }
-        )
+          return this.getRoomState(c.name)
+        }),
       )
       return states
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -70,7 +68,9 @@ export class Cache {
         this.storage.emitConfig(data)
       }
       return data
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -84,7 +84,9 @@ export class Cache {
         this.storage.emitState(data)
       }
       return data
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   // working with data
@@ -101,7 +103,9 @@ export class Cache {
       }
 
       return { ...data, id: room, _id: obj.has(data, '_id') ? data._id : uuid() }
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -118,7 +122,9 @@ export class Cache {
       }
 
       return { ...this.roomTemplate, id: room, _id: uuid() }
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -136,7 +142,9 @@ export class Cache {
 
       log('using template')
       return []
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   // working with room cache config
@@ -150,7 +158,9 @@ export class Cache {
   async hasRoomConfig(room) {
     try {
       return this.engine.has(room)
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -163,7 +173,9 @@ export class Cache {
   async hasRoomState(room) {
     try {
       return this.memory.has(room)
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -181,7 +193,9 @@ export class Cache {
       }
       const d = await this.engine.get(room, { ...this.roomConfigTemplate, id: room })
       return modelRoomConfig.cast(d)
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -199,7 +213,9 @@ export class Cache {
       }
       const d = await this.memory.get(room, { ...this.roomStateTemplate, id: room })
       return modelRoomState.cast(d)
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -213,7 +229,9 @@ export class Cache {
   async setRoomConfig(room, data = {}) {
     try {
       return this.engine.set(room, modelRoomConfig.cast({ ...data, id: room }))
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -227,7 +245,9 @@ export class Cache {
   async setRoomState(room, data = {}) {
     try {
       return this.memory.set(room, modelRoomState.cast({ ...data, id: room }))
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -240,7 +260,9 @@ export class Cache {
   async getRoomConfig(room) {
     try {
       return this.verifyRoomConfigExistence(room)
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -253,7 +275,9 @@ export class Cache {
   async getRoomState(room) {
     try {
       return this.verifyRoomStateExistence(room)
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -266,7 +290,9 @@ export class Cache {
   async initRoomConfig(room) {
     try {
       return this.setRoomConfig(room, { ...this.roomConfigTemplate, id: room })
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -279,7 +305,9 @@ export class Cache {
   async initRoomState(room) {
     try {
       return this.setRoomState(room, { ...this.roomStateTemplate, id: room })
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -289,11 +317,11 @@ export class Cache {
   async joinRoomConfigs() {
     try {
       const configs = await this.getAllRoomConfigs()
-      const states = await Promise.all(
-        configs.map(t => this.getRoomState(t.name))
-      )
+      const states = await Promise.all(configs.map(t => this.getRoomState(t.name)))
       return { configs, states }
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -314,11 +342,11 @@ export class Cache {
     try {
       await this.modifyRoomConfig(room, data)
       const configs = await this.getAllRoomConfigs()
-      const states = await Promise.all(
-        configs.map(c => this.getRoomState(c.name))
-      )
+      const states = await Promise.all(configs.map(c => this.getRoomState(c.name)))
       return { configs, states }
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -335,14 +363,16 @@ export class Cache {
 
       const gates = await dbGates.getAll()
       const gateObject = gates.find(t => t.active === true)
-      const gate = (gateObject === undefined ? 'http://172.22.16.87:9000/gate' : gateObject.address)
+      const gate = gateObject === undefined ? 'http://172.22.16.87:9000/gate' : gateObject.address
       const config = await this.getRoomConfig(room)
       if (config.func !== null) {
         return new Function('axios, log, param, gate', config.func)(axios, log, parent, gate)
       }
 
       return []
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -359,7 +389,9 @@ export class Cache {
       const newConfig = modelRoomConfig.cast({ ...config, ...data, id: room })
       await this.setRoomConfig(room, newConfig)
       return newConfig
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -380,7 +412,9 @@ export class Cache {
       this.storage.emitState(states)
       // this.storage
       return newState
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -394,11 +428,7 @@ export class Cache {
       const config = await this.getRoomConfig(room)
       let state = await this.getRoomState(room)
 
-      if (
-        state.started !== true
-        && config.enabled === true
-        && config.valid === true
-      ) {
+      if (state.started !== true && config.enabled === true && config.valid === true) {
         log('start cache', room)
         this.spinoff(10, room)
         state = await this.modifyRoomState(room, { started: true })
@@ -408,7 +438,9 @@ export class Cache {
 
       state = await this.getRoomState(config.id)
       return state
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -419,9 +451,7 @@ export class Cache {
   async startOn(config) {
     try {
       let state = await this.getRoomState(config.id)
-      if (config.enabled === true
-        && config.valid === true
-      ) {
+      if (config.enabled === true && config.valid === true) {
         log('start cache', config.id)
         this.spinoff(10, config.id)
 
@@ -431,7 +461,9 @@ export class Cache {
 
       state = await this.getRoomState(config.id)
       return state
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -444,7 +476,9 @@ export class Cache {
       // const state = await this.getRoomState(room)
       log('turn off', room)
       return this.modifyRoomState(room, { started: false })
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -459,7 +493,9 @@ export class Cache {
       const parentData = await this.getCachedData(config.parent)
 
       return this.makeFetch(room, parentData)
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -496,7 +532,9 @@ export class Cache {
       this.autoUpdater(room)
 
       return data
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -520,7 +558,9 @@ export class Cache {
       await this.modifyRoom(room, { refreshing: false, data })
 
       return data
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -554,7 +594,9 @@ export class Cache {
       await this.modifyRoomState(room, { executed: true })
 
       return this.autoUpdater(room)
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -577,7 +619,9 @@ export class Cache {
       log('spinoff', room)
       await this.delay(ms)
       return this.runTask(room)
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -617,7 +661,9 @@ export class Cache {
 
       state = await this.modifyRoomState(room, state)
       return state
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -627,7 +673,9 @@ export class Cache {
   async getAllRoomConfigs() {
     try {
       return this.engine.getAll()
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
@@ -637,9 +685,10 @@ export class Cache {
   async getAllRoomStates() {
     try {
       return this.memory.getAll()
-    } catch (err) { throw (err) }
+    } catch (err) {
+      throw err
+    }
   }
-
 }
 
 // export const cache = new Cache()

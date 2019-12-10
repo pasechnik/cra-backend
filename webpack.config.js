@@ -1,8 +1,8 @@
 /**
  * Created by vlad on 22.09.16.
  */
-var path = require('path');
-var nodeExternals = require('webpack-node-externals');
+var path = require('path')
+var nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   entry: path.join(__dirname, './src/bin/server.js'),
@@ -18,5 +18,4 @@ module.exports = {
       { test: /\.json$/, loader: 'json' },
     ],
   },
-
 }

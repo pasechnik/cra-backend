@@ -2,9 +2,7 @@ import uuid from 'uuid'
 import debug from 'debug'
 import path from 'path'
 import { obj, str } from 'the-utils'
-import {
-  getCtxParam, parseJson, retError, retInfo,
-} from './context'
+import { getCtxParam, parseJson, retError, retInfo } from './context'
 import { fReadFile } from './file'
 import { Engine } from '../app/engine-cassandra-async'
 import config from '../config'
@@ -12,7 +10,7 @@ import config from '../config'
 const error = debug('app:module:db:error')
 const log = debug('app:module:db')
 
-export const mGetEngine = (table) => {
+export const mGetEngine = table => {
   log(`Creating db engine ${config.cassandra.keyspace}.${table}`)
   return new Engine(table, config.cassandra.keyspace)
   // if (obj.get(engines, table, null) === null) {
@@ -22,7 +20,7 @@ export const mGetEngine = (table) => {
   // return obj.get(engines, table, null)
 }
 
-export const mCheckTable = async (table) => {
+export const mCheckTable = async table => {
   log(`checking table - ${table}`)
   const e = mGetEngine(table)
   const r = await e.createTable()
@@ -30,7 +28,7 @@ export const mCheckTable = async (table) => {
   return r
 }
 
-export const mCheckKeyspace = async (table) => {
+export const mCheckKeyspace = async table => {
   log('checking keyspace')
   const e = mGetEngine(table)
   const r = await e.createKeyspace()
@@ -170,12 +168,7 @@ export const dbImportArray = async (name, items) => {
 
 export const dbImportFile = async (folder, name, file) => {
   log({ folder, name, file })
-  const items = await fReadFile(
-    name,
-    () => path.resolve(process.cwd(), folder, file),
-    [],
-    parseJson
-  )
+  const items = await fReadFile(name, () => path.resolve(process.cwd(), folder, file), [], parseJson)
   log({ items })
   return dbImportArray(name, items)
 }

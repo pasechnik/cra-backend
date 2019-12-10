@@ -3,11 +3,7 @@ import debug from 'debug'
 import { obj } from 'the-utils'
 import { cast, patch, output } from '../../models/log'
 import { cast as settingsCast } from '../../models/settings'
-import {
-  getCtxParam,
-  runFunction,
-  runOutput,
-} from '../../modules/context'
+import { getCtxParam, runFunction, runOutput } from '../../modules/context'
 import { mCheckTable, dbGetAll, dbCreate, dbGetOne, dbUpdate, dbPatch, dbDelete, dbClear } from '../../modules/db'
 
 import { runCheckTable, getEngine } from './module'
@@ -56,12 +52,11 @@ export const clearLogsOutdated = async (ctx, next) => {
     const getBodyParam = getCtxParam(ctx, 'body')
     const settings = getBodyParam('settings', settingsCast({}))
 
-    const time = (new Date()).getTime()
+    const time = new Date().getTime()
     const logs = (await e.getAll()).map(t => output(t))
 
     if (settings.clearLogsInterval !== 0) {
-      await Promise.all(logs.filter(t => t.date < time - settings.clearLogsInterval)
-        .map(async t => e.delete(t.id)), )
+      await Promise.all(logs.filter(t => t.date < time - settings.clearLogsInterval).map(async t => e.delete(t.id)))
     }
     ctx.body = {
       ...ctx.body,
@@ -87,8 +82,7 @@ export const deleteLogsByTime = async (ctx, next) => {
     const logs = obj.deepGet(ctx, ['body', 'logs'], [])
 
     // log({ time })
-    await Promise.all(logs.filter(t => t.date < time)
-      .map(async t => e.delete(t.id)), )
+    await Promise.all(logs.filter(t => t.date < time).map(async t => e.delete(t.id)))
 
     delete ctx.body.logs
 
@@ -137,7 +131,7 @@ export const logAction = async (ctx, next) => {
     await mCheckTable('logs')
     const e = getEngine('logs')
     // const d = new Date()
-    const d = (new Date()).getTime()
+    const d = new Date().getTime()
 
     const logItem = cast({})
     const server = obj.deepGet(ctx, ['body', 'server'], null)

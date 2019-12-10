@@ -13,7 +13,6 @@ const expItem = expect.objectContaining({
 })
 
 describe('API: -> ROOT route', () => {
-
   // console.log(app.listen())
   // const agent = request.agent(app.listen())
   // const agent = request.agent('http://localhost:4060/')
@@ -28,8 +27,7 @@ describe('API: -> ROOT route', () => {
   // })
 
   test('GET /', async () => {
-    expect(true)
-      .toBeTruthy()
+    expect(true).toBeTruthy()
     // try {
     //   await agent
     //     .get('/')

@@ -10,13 +10,11 @@ const log = debug('app:settings:module')
 export const getEngine = () => mGetEngine('settings')
 export const runCheckTable = async () => mCheckTable('settings')
 
-export const fetchSettings = async () => cast(await getEngine()
-  .get(id, {}))
+export const fetchSettings = async () => cast(await getEngine().get(id, {}))
 
-export const updateSettings = async (s) => {
+export const updateSettings = async s => {
   const model = cast(s)
-  await getEngine()
-    .set(id, model)
+  await getEngine().set(id, model)
   return model
 }
 
@@ -100,4 +98,3 @@ export const dbDeleteSettings = (e, c, o) => async (key, ctx) => {
     }
   }
 }
-

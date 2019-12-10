@@ -20,14 +20,14 @@ export const fields = {
 export const filter = props => obj.createFilter(fields, props)
 
 // export const cast = props => obj.cast(fields, props)
-export const input = (props) => {
+export const input = props => {
   const result = obj.cast(fields, props)
   result.password = bcrypt.hashSync(result.password)
   result.name = result.username
   return result
 }
 
-export const cast = (props) => {
+export const cast = props => {
   const result = obj.cast(fields, props)
   result.name = result.username
   return result
@@ -44,7 +44,7 @@ export const patch = (o, props) => {
 }
 
 // export const output = props => cast(props)
-export const output = (props) => {
+export const output = props => {
   const result = cast(props)
   delete result.password
   delete result.name

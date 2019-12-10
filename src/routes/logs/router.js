@@ -22,82 +22,42 @@ export const routes = [
   {
     method: 'POST',
     route: '/',
-    handlers: [
-      logs.checkTable(),
-      auth.ensureUser(['admin']),
-      logs.createLog(),
-      cutResults('log'),
-    ],
+    handlers: [logs.checkTable(), auth.ensureUser(['admin']), logs.createLog(), cutResults('log')],
   },
   {
     method: 'GET',
     route: '/clear',
-    handlers: [
-      logs.checkTable(),
-      auth.ensureUser(['admin']),
-      logs.clearData(),
-      cutResults('logs'),
-    ],
+    handlers: [logs.checkTable(), auth.ensureUser(['admin']), logs.clearData(), cutResults('logs')],
   },
   {
     method: 'GET',
     route: '/:id',
-    handlers: [
-      logs.checkTable(),
-      auth.ensureUser(),
-      logs.getLog(),
-      cutResults('log'),
-    ],
+    handlers: [logs.checkTable(), auth.ensureUser(), logs.getLog(), cutResults('log')],
   },
   {
     method: 'PUT',
     route: '/:id',
-    handlers: [
-      logs.checkTable(),
-      auth.ensureUser(['admin']),
-      logs.updateLog(),
-      cutResults('log'),
-    ],
+    handlers: [logs.checkTable(), auth.ensureUser(['admin']), logs.updateLog(), cutResults('log')],
   },
   {
     method: 'PATCH',
     route: '/:id',
-    handlers: [
-      logs.checkTable(),
-      auth.ensureUser(['admin']),
-      logs.getLog(),
-      logs.patchLog(),
-      cutResults('log'),
-    ],
+    handlers: [logs.checkTable(), auth.ensureUser(['admin']), logs.getLog(), logs.patchLog(), cutResults('log')],
   },
   {
     method: 'DELETE',
     route: '/all',
-    handlers: [
-      logs.checkTable(),
-      auth.ensureUser(['admin']),
-      logs.deleteLogs,
-    ],
+    handlers: [logs.checkTable(), auth.ensureUser(['admin']), logs.deleteLogs],
   },
   {
     method: 'DELETE',
     route: '/time',
-    handlers: [
-      logs.checkTable(),
-      auth.ensureUser(),
-      logs.getLogs(),
-      logs.deleteLogsByTime,
-    ],
+    handlers: [logs.checkTable(), auth.ensureUser(), logs.getLogs(), logs.deleteLogsByTime],
   },
   {
     method: 'DELETE',
     route: '/:id',
-    handlers: [
-      logs.checkTable(),
-      auth.ensureUser(['admin']),
-      logs.getLog(),
-      logs.deleteLog(),
-    ],
+    handlers: [logs.checkTable(), auth.ensureUser(['admin']), logs.getLog(), logs.deleteLog()],
   },
 ]
 

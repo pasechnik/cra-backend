@@ -12,17 +12,20 @@ const log = debug('app:auth:controller')
 const routeKey = 'auth'
 const routeKeys = `${routeKey}s`
 
-export const promiseAuth = ctx => new Promise((resolve, reject) => passport.authenticate('local', (err, user, info) => {
-  if (info) {
-    return reject(info)
-  }
-  if (user) {
-    const response = user
-    delete response.password
-    return resolve(response)
-  }
-  return null
-})(ctx))
+export const promiseAuth = ctx =>
+  new Promise((resolve, reject) =>
+    passport.authenticate('local', (err, user, info) => {
+      if (info) {
+        return reject(info)
+      }
+      if (user) {
+        const response = user
+        delete response.password
+        return resolve(response)
+      }
+      return null
+    })(ctx),
+  )
 
 export const authUserInner = () => async (key, ctx) => {
   const user = await promiseAuth(ctx)
@@ -51,8 +54,7 @@ export const ensureUserInner = role => async (key, ctx) => {
     // log({ decoded })
 
     const e = getEngine()
-    user = await e.getAll()
-      .then(users => users.find(u => u.id === decoded.id))
+    user = await e.getAll().then(users => users.find(u => u.id === decoded.id))
 
     // log({ user })
     // const
@@ -79,12 +81,12 @@ export const ensureUserInner = role => async (key, ctx) => {
     [key]: output(user),
   }
 
-// ctx.state.user = await Client.findById(decoded.id, '-password')
-// if (!ctx.state.user) {
-//   ctx.throw(401)
-// }
+  // ctx.state.user = await Client.findById(decoded.id, '-password')
+  // if (!ctx.state.user) {
+  //   ctx.throw(401)
+  // }
 
-// return next()
+  // return next()
 }
 
 export const authUser = () => runOutput('user', authUserInner())

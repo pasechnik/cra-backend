@@ -12,11 +12,9 @@ export class Engine {
 
   async count(q) {
     try {
-      return (
-        q !== undefined && q.length
-          ? obj.toArrayFilter(this.data, new RegExp(q)).length
-          : obj.toArray(this.data).length
-      )
+      return q !== undefined && q.length
+        ? obj.toArrayFilter(this.data, new RegExp(q)).length
+        : obj.toArray(this.data).length
     } catch (e) {
       throw e
     }
@@ -63,11 +61,7 @@ export class Engine {
 
   async getAll(q) {
     try {
-      return (
-        q !== undefined && q.length
-          ? obj.toArrayFilter(this.data, new RegExp(q))
-          : obj.toArray(this.data)
-      )
+      return q !== undefined && q.length ? obj.toArrayFilter(this.data, new RegExp(q)) : obj.toArray(this.data)
     } catch (e) {
       throw e
     }
@@ -99,7 +93,6 @@ export class Engine {
       throw e
     }
   }
-
 }
 
 // export const engine = new Engine()

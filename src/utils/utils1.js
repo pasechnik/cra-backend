@@ -28,7 +28,6 @@ const deep = (obj, props, defaultValue) => {
   return deep(foundSoFar, remainingProps, defaultValue)
 }
 
-
 const deepGet = (obj, props, defaultValue) => {
   // If we have reached an undefined/null property
   // then stop executing and return the default value.
@@ -52,19 +51,15 @@ const deepGet = (obj, props, defaultValue) => {
 
 const isEmpty = o => !(o.constructor === Object && Object.keys(o).length > 0)
 
-const toArray = o => Object.keys(o)
-  .map(t => o[t])
+const toArray = o => Object.keys(o).map(t => o[t])
 
-const toArrayFilter = (o, r) => Object.keys(o)
-  .filter(t => r.test(t))
-  .map(t => o[t])
+const toArrayFilter = (o, r) =>
+  Object.keys(o)
+    .filter(t => r.test(t))
+    .map(t => o[t])
 
 const cast = (fields, props) => {
-  const item = Object.keys(fields)
-    .reduce(
-      (acc, val) => set(acc, val, get(props, val, fields[val])),
-      {}
-    )
+  const item = Object.keys(fields).reduce((acc, val) => set(acc, val, get(props, val, fields[val])), {})
   if (has(props, '_id')) {
     set(item, '_id', get(props, '_id', 0))
     // item['_id'] = get(props, '_id', 0)
@@ -72,41 +67,33 @@ const cast = (fields, props) => {
   return item
 }
 
-export const createFilter = (fields, props) => Object.keys(fields)
-  .reduce(
-    (acc, val) => (has(props, val) ? set(acc, val, get(props, val, fields[val])) : acc),
-    {}
-  )
+export const createFilter = (fields, props) =>
+  Object.keys(fields).reduce((acc, val) => (has(props, val) ? set(acc, val, get(props, val, fields[val])) : acc), {})
 
-const filterKeys = (o, r) => Object.keys(o)
-  .filter(t => r.test(t))
-  .reduce(
-    (n, t) => set(n, t, o[t]),
-    {}
-  )
+const filterKeys = (o, r) =>
+  Object.keys(o)
+    .filter(t => r.test(t))
+    .reduce((n, t) => set(n, t, o[t]), {})
 
-const isObject = a => (typeof a === 'object' && a !== null)
+const isObject = a => typeof a === 'object' && a !== null
 
-const objParse = (row) => {
+const objParse = row => {
   let parsedData = Object.assign({}, row)
-  Object.keys(row)
-    .forEach((key) => {
-      if (isObject(row[key])) {
-        const rowObjectFields = {}
-        Object.keys(row[key])
-          .forEach((ob) => {
-            rowObjectFields[`${key}-${ob}`] = row[key][ob]
-          })
-        parsedData = Object.assign(parsedData, rowObjectFields)
-      }
-    })
+  Object.keys(row).forEach(key => {
+    if (isObject(row[key])) {
+      const rowObjectFields = {}
+      Object.keys(row[key]).forEach(ob => {
+        rowObjectFields[`${key}-${ob}`] = row[key][ob]
+      })
+      parsedData = Object.assign(parsedData, rowObjectFields)
+    }
+  })
   return parsedData
 }
 
 const formatDetails = (ob, schema) => {
   const newDetails = {}
-  Object.keys(ob)
-    .forEach(d => (newDetails[getKey(schema, d)] = ob[d]))
+  Object.keys(ob).forEach(d => (newDetails[getKey(schema, d)] = ob[d]))
   return newDetails
 }
 
@@ -117,27 +104,25 @@ const getKey = (rec, key) => {
 
 // ======== Array
 const isArray = a => a && Array.isArray(a)
-const objByKey = (a, key) => (isArray(a) ? a.reduce(
-    (n, t) => {
-      (n[t[key]] || (n[t[key]] = [])).push(t)
-      return n
-    },
-    {}
-  ) : {}
-)
+const objByKey = (a, key) =>
+  isArray(a)
+    ? a.reduce((n, t) => {
+        ;(n[t[key]] || (n[t[key]] = [])).push(t)
+        return n
+      }, {})
+    : {}
 
 const getArrValue = (a, index, defaultValue) => (typeof a[index] !== 'undefined' ? a[index] : defaultValue)
 
 const objByPages = (a, rows) => {
-  const inRows = (rows === 0 ? 10 : rows)
-  return isArray(a) ? a.reduce(
-    (n, t, i) => {
-      const j = Math.trunc(i / inRows);
-      (n[j] || (n[j] = [])).push(t)
-      return n
-    },
-    {}
-  ) : {}
+  const inRows = rows === 0 ? 10 : rows
+  return isArray(a)
+    ? a.reduce((n, t, i) => {
+        const j = Math.trunc(i / inRows)
+        ;(n[j] || (n[j] = [])).push(t)
+        return n
+      }, {})
+    : {}
 }
 
 const group = (s, a) => {
@@ -147,7 +132,7 @@ const group = (s, a) => {
       return grouped.push(f)
     }
     const temp = {}
-    s.forEach((k) => {
+    s.forEach(k => {
       if (k.grouped && f[k.key] === a[i - 1][k.key]) {
         temp[k.key] = null
       } else {
@@ -164,9 +149,9 @@ const getActive = (arr, key) => {
   return filtred.length ? filtred[0][key] : ''
 }
 
-const deployIntegrateReformat = (deployInstancesList) => {
+const deployIntegrateReformat = deployInstancesList => {
   const convertedData = {}
-  deployInstancesList.forEach((s) => {
+  deployInstancesList.forEach(s => {
     const name = getServiceName(deepGet(s, ['service'], ''))
     convertedData[name] = getServiceVersion(deepGet(s, ['service'], ''))
     convertedData[`cpu_${name}`] = deepGet(s, ['service', 'resources', 'cpu'], '')
@@ -176,19 +161,17 @@ const deployIntegrateReformat = (deployInstancesList) => {
   return convertedData
 }
 
-const deployReformat = (deployInstancesList) => {
+const deployReformat = deployInstancesList => {
   const convertedData = {}
-  Object.keys(deployInstancesList)
-    .forEach((s) => {
-      convertedData[s] = getServiceVersion(deployInstancesList[s])
-    })
+  Object.keys(deployInstancesList).forEach(s => {
+    convertedData[s] = getServiceVersion(deployInstancesList[s])
+  })
   return convertedData
 }
 
-const getPodSatatus = (pod) => {
+const getPodSatatus = pod => {
   const phase = deepGet(pod, ['status', 'phase'], '')
-  const types = deepGet(pod, ['status', 'conditions'], [])
-    .filter(f => f.type === 'Ready')
+  const types = deepGet(pod, ['status', 'conditions'], []).filter(f => f.type === 'Ready')
   if (types.length) {
     return { phase, status: types[0].status }
   }
@@ -196,7 +179,7 @@ const getPodSatatus = (pod) => {
 }
 
 const getFiltredData = (arr, fil, val, key) => {
-  const filtred = arr.filter(f => (f[fil] === val))
+  const filtred = arr.filter(f => f[fil] === val)
   return filtred.length ? filtred[0][key] : ''
 }
 
@@ -217,28 +200,26 @@ export const hasintersect = (a, b) => a.reduce((r, x) => r || b.includes(x), fal
  *
  * @return {Array}
  */
-export const unique = (a, b) => b.reduce(
-  (r, x) => (r.includes(x) ? r : [...r, x]),
-  a.reduce((r, x) => (r.includes(x) ? r : [...r, x]), []),
-)
+export const unique = (a, b) =>
+  b.reduce(
+    (r, x) => (r.includes(x) ? r : [...r, x]),
+    a.reduce((r, x) => (r.includes(x) ? r : [...r, x]), []),
+  )
 
 /**
  *
  * @param a
  */
-export const keyUnique = (a, key) => a.reduce(
-  (r, x) => [...unique(r, get(x, key, []))],
-  [],
-)
-
+export const keyUnique = (a, key) => a.reduce((r, x) => [...unique(r, get(x, key, []))], [])
 
 // =========== String
 const template = (strings, ...keys) => (...values) => {
   const dict = getArrValue(values, [values.length - 1], {})
   return strings.reduce(
-    (accumulator, part, i) => accumulator
-      + (Number.isInteger(keys[i - 1]) ? getArrValue(values, keys[i - 1], '') : getKeyValue(dict, keys[i - 1], ''))
-      + part
+    (accumulator, part, i) =>
+      accumulator +
+      (Number.isInteger(keys[i - 1]) ? getArrValue(values, keys[i - 1], '') : getKeyValue(dict, keys[i - 1], '')) +
+      part,
   )
 }
 
@@ -248,7 +229,7 @@ const cmp = (a, b) => {
   return 0
 }
 
-const toBoolean = (s) => {
+const toBoolean = s => {
   if (s === undefined) {
     return false
   }
@@ -256,43 +237,42 @@ const toBoolean = (s) => {
   return !falsy.test(s) && !!s
 }
 
-const ucFirst = string => ((typeof string === 'string' || string instanceof String) ? string.charAt(0)
-  .toUpperCase() + string.slice(1)
-  .toLowerCase() : string)
+const ucFirst = string =>
+  typeof string === 'string' || string instanceof String
+    ? string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+    : string
 
 const short = (a, b) => {
   a = a.toString()
   b = b.toString()
   let n = 0
   let i = 0
-  for (i = 0, n = Math.max(a.length, b.length); i < n && a.charAt(i) === b.charAt(i); ++i) {
-
-  }
+  for (i = 0, n = Math.max(a.length, b.length); i < n && a.charAt(i) === b.charAt(i); ++i) {}
   if (i === n) return 0
   return a.charAt(i) > b.charAt(i) ? -1 : 1
 }
 
-const search = (str1, str2) => String(str1 || ''.toLowerCase())
-  .includes(String(str2 || ''.toLowerCase()))
+const search = (str1, str2) => String(str1 || ''.toLowerCase()).includes(String(str2 || ''.toLowerCase()))
 
-const btoa = str => Buffer.from(str)
-  .toString('base64')
+const btoa = str => Buffer.from(str).toString('base64')
 
 const makeBasicAuth = (n, p) => `Basic ${btoa(`${n}:${p}`)}`
 
-const getServiceVersion = o => deepGet(o, ['image'], '')
-  .split(/[:]+/)
-  .pop()
-const getServiceName = o => deepGet(o, ['image'], '')
-  .split(/[/]+/)
-  .pop()
-  .split(/[:]+/)
-  .shift()
+const getServiceVersion = o =>
+  deepGet(o, ['image'], '')
+    .split(/[:]+/)
+    .pop()
+const getServiceName = o =>
+  deepGet(o, ['image'], '')
+    .split(/[/]+/)
+    .pop()
+    .split(/[:]+/)
+    .shift()
 
 const checkport = (host, port) => (host.indexOf(':') === -1 ? `${host}:${port}` : host)
 
 // ======== Date n Time
-const toUTCString = (time) => {
+const toUTCString = time => {
   const d = new Date()
   return time && d.setTime(time) ? d.toUTCString() : '-'
 }

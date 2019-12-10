@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  cassandra_db:
+    image: cassandra:latest
+    container_name: cassandra_db
+    domainname: cra.xyz
+    hostname: db
+    ports:
+      - 7000:7000
+      - 7001:7001
+      - 7199:7199
+      - 9042:9042
+      - 9160:9160
+    environment:
+      - CASSANDRA_START_RPC=true
+  # -------------------------------
+
+  # docker run --name reaper -d smartcat/cassandra-reaper -p 8090:8090 -p 8091:8091
+  #   reaper:
+  #     image: smartcat/cassandra-reaper
+  #     logging:
+  #       driver: json-file
+  #       options:
+  #         max-file: "2"
+  #         max-size: "10m"
+  #     ports:
+  #       - 8080:8080
+  #       - 8090:8090
+  #       - 8091:8091
+
+  # -------------------------------
+  #    volumes:
+  #      - ./cassandra-reaper.yaml:/opt/cassandra-reaper/cassandra-reaper.yaml:ro
+
+  backend:
+    image: univerio/cra-backend:latest
+    container_name: backend
+    hostname: backend.xyz
+    build:
+      context: ../
+      dockerfile: ./Dockerfile
+    environment:
+      - DEBUG=app:*
+      - NODE_ENV=production
+    ports:
+      - 4060:4060
+    depends_on:
+      - cassandra_db
+# -------------------------------
+
+#  frontend:
+#    image: cra-boiler/image
+#    container_name: frontend
+#    hostname: frontend.xyz
+#    depends_on:
+#      - backend
+#    build:
+#      context: ../../cra-boiler
+#      dockerfile: Dockerfile
+#    environment:
+#      - UI_BACKEND=127.0.0.1:4060
+#      - DEBUG=app:*
+#      - NODE_ENV=production
+#    ports:
+#      - 3000:3000

@@ -2,11 +2,7 @@ import config from '../../config'
 import { cast, patch, output } from '../../models/settings'
 import { dbClear } from '../../modules/db'
 import { readFile } from '../../modules/file'
-import {
-  runFunction,
-  runOutput,
-  parseJson,
-} from '../../modules/context'
+import { runFunction, runOutput, parseJson } from '../../modules/context'
 import { offlineData, init } from '../../app/init'
 import {
   getEngine,
@@ -21,7 +17,7 @@ import {
 const routeKey = 'setting'
 const routeKeys = `${routeKey}s`
 
-export const fImportOffline = () => async (key) => {
+export const fImportOffline = () => async key => {
   await init()
   await offlineData(true)
   return {

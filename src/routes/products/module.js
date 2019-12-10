@@ -4,5 +4,5 @@ import { mCheckTable, mGetEngine } from '../../modules/db'
 // const error = debug('app:applications:module:error')
 // const log = debug('app:applications:module')
 
-export const getEngine = () => mGetEngine('applications')
-export const runCheckTable = async (key, ctx) => mCheckTable('applications')
+export const getEngine = () => mGetEngine('products')
+export const runCheckTable = async (key, ctx) => mCheckTable('products')

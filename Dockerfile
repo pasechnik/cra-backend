@@ -11,13 +11,15 @@ ENV HTPPS_PORT "4443"
 ENV NODE_ENV "production"
 EXPOSE 4060 4443
 
-# RUN apk update && apk add --update --no-cache alpine-sdk python && \
-#    python -m ensurepip && \
-#    rm -r /usr/lib/python*/ensurepip && \
-#    pip install --upgrade pip setuptools && \
-#    rm -r /root/.cache && \
+ RUN apk update && apk add --update --no-cache alpine-sdk python && \
+    python -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip install --upgrade pip setuptools && \
+    rm -r /root/.cache
 
-RUN npm install --no-optional --silent
+#    && \
+# --silent
+RUN npm install --no-optional
 RUN npm run deploy:prod
 
 CMD ["npm", "start"]

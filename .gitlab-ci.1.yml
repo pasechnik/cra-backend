@@ -101,13 +101,12 @@ docker-build-latest:
 .pages:
   stage: package
   script:
-  - cp -r ./build/* ./public
+    - cp -r ./build/* ./public
   artifacts:
     paths:
-    - public
+      - public
   only:
     - master
-
 #  before_script:
 #    - docker info
 

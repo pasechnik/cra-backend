@@ -18,15 +18,13 @@ const options = {
   cert: fs.readFileSync(path.resolve(process.cwd(), 'keys/localhost.crt')),
 }
 
-https.createServer(options, app.callback())
-  .listen(config.secureport, () => {
-    log(`start listening on ${config.secureport} in ssl mode `)
-  })
+https.createServer(options, app.callback()).listen(config.secureport, () => {
+  log(`start listening on ${config.secureport} in ssl mode `)
+})
 
-http.createServer(app.callback())
-  .listen(config.port, () => {
-    log(`start listening on ${config.port}`)
-  })
+http.createServer(app.callback()).listen(config.port, () => {
+  log(`start listening on ${config.port}`)
+})
 
 // app.server = app.listen(config.port, () => {
 //   log(`start listening on ${config.port}`)

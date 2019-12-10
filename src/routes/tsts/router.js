@@ -29,9 +29,7 @@ export const routes = [
   {
     method: 'GET',
     route: '/:id',
-    handlers: [
-      test.getTest('test'),
-    ],
+    handlers: [test.getTest('test')],
   },
   {
     method: 'PATCH',
