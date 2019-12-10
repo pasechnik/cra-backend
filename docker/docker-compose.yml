@@ -36,13 +36,17 @@ services:
   backend:
     image: univerio/cra-backend:latest
     container_name: backend
-    hostname: backend.xyz
+    domainname: cra.xyz
+    hostname: backend
     build:
       context: ../
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
+    links:
+      - 'cassandra_db:db'
     environment:
       - DEBUG=app:*
       - NODE_ENV=production
+      - CASSANDRA=db
     ports:
       - 4060:4060
     depends_on:
