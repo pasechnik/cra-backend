@@ -17,8 +17,17 @@ EXPOSE 4060 4443
 #    pip install --upgrade pip setuptools && \
 #    rm -r /root/.cache
 
+# RUN apk update
+
+ RUN apk add --update --no-cache alpine-sdk python && \
+    python -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip install --upgrade pip setuptools && \
+    rm -r /root/.cache
+
 #    && \
 # --silent
+
 RUN npm install --no-optional
 RUN npm run deploy:prod
 
